@@ -9,7 +9,6 @@ function Header() {
 function App() {
   return (
     <div className="App">
-        <Header/>
       <h1>Nofoss</h1>
     </div>
   );
