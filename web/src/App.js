@@ -2,14 +2,10 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function Header() {
-
-}
-
 function App() {
   return (
     <div className="App">
-      <h1>Nofoss</h1>
+      <h1>Nofoss!</h1>
     </div>
   );
 }
