@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import './App.css';
 import Switch from "react-router-dom/es/Switch";
 import Route from "react-router-dom/es/Route";
-import withRouter from "react-router/modules/withRouter";
+import {withRouter} from "react-router";
 
 function NofossLogo() {
     return (
