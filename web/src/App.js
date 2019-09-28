@@ -6,7 +6,7 @@ import Route from "react-router-dom/es/Route";
 
 function NofossLogo() {
     return (
-        <img src="%PUBLIC_URL%/nofosslogo.svg" className="Logo" alt="NoFoss Logo"/>
+        <img src="https://i.imgur.com/bVMYcYR.png" className="Logo" alt="NoFoss Logo"/>
     )
 }
 
