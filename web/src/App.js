@@ -160,21 +160,52 @@ function CreateUser() {
     );
 }
 
+function CreateVehicle() {
+    return (
+        <section>
+            <InputGroup className="mb-3">
+                <InputGroup.Prepend>
+                    <InputGroup.Text id="vehicleBrand" value = {vehicleStore.newBrand} onChange={(e)=>vehicleStore.newBrand=e.target.value}>Brand</InputGroup.Text>
+                </InputGroup.Prepend>
+                <FormControl
+                    aria-label="Brand"
+                    aria-describedby="inputGroup-sizing-default"
+                />
+            </InputGroup>
+            <br />
+            <InputGroup className="mb-3">
+                <InputGroup.Prepend>
+                    <InputGroup.Text id="vehicleName" value = {vehicleStore.newName}  onChange={(e)=>vehicleStore.newName=e.target.value}>Name</InputGroup.Text>
+                </InputGroup.Prepend>
+                <FormControl
+                    aria-label="Name"
+                    aria-describedby="inputGroup-sizing-default"
+                />
+            </InputGroup>
+            <br />
+            <InputGroup className="mb-3">
+                <InputGroup.Prepend>
+                    <InputGroup.Text id="vehiclePrice" value = {vehicleStore.newPrice} onChange={(e)=>vehicleStore.newPrice=e.target.value}>Price</InputGroup.Text>
+                </InputGroup.Prepend>
+                <FormControl
+                    aria-label="Price"
+                    aria-describedby="inputGroup-sizing-default"
+                />
+            </InputGroup>
+            <Button onClick={() => vehicleStore.vehicles.push({brand:vehicleStore.newBrand,name:vehicleStore.newName,price:vehicleStore.newPrice})}>Opret Køretøj</Button>
+        </section>
+    );
+}
+
 function NavTabs() {
     return (
         <Tabs defaultActiveKey="search" id="uncontrolled-tab-example">
             <Tab eventKey="search" title="Søg køretøj">
-                <h1>Søg efter dit ønskede køretøj.</h1>
+
                 <SearchVehicle/>
             </Tab>
             <Tab eventKey="profile" title="Profil">
-                <h1>Dette er din profil.</h1>
                 <UserInfo/>
-            </Tab>
-            <Tab eventKey="contact" title="skjult* Admin" /*disabled*/>
-                <Link to="/admin">Admin Side</Link>
-                <NewVehicle/>
-                <CreateUser/>
             </Tab>
         </Tabs>
     );
@@ -183,20 +214,9 @@ function NavTabs() {
 function AdminNavTabs() {
     return (
         <section>
-            <h1>ADMINISTRATOR PAGE</h1>
-            <Tabs defaultActiveKey="search" id="uncontrolled-tab-example">
-                <Tab eventKey="search" title="Søg køretøj">
-                    <h1>Søg efter dit ønskede køretøj.</h1>
-                    <SearchVehicle/>
-                </Tab>
-                <Tab eventKey="profile" title="Ny Bruger">
-                    <h1>Lav en ny bruger.</h1>
-                    <CreateUser/>
-                </Tab>
-                <Tab eventKey="contact" title="skjult* Admin" /*disabled*/>
-                    <Link to="/admin">Admin Side</Link>
-                    <NewVehicle/>
-                    <CreateUser/>
+            <Tabs defaultActiveKey="create" id="uncontrolled-tab-example">
+                <Tab eventKey="create" title="Opret nyt køretøj">
+                    <CreateVehicle/>
                 </Tab>
             </Tabs>
         </section>
@@ -208,12 +228,12 @@ function App() {
         <div>
             <container>
                 <img src="https://i.imgur.com/bVMYcYR.png" className="Logo" alt="NoFoss Logo"/>
-                <NavTabs/>
             </container>
             <container>
+
                 <Switch>
                     <Route exact path={"/admin"} component={Admin}/>
-                    <Route exact path={"/"} render={() => <div></div>}/>
+                    <Route exact path={"/"} render={() => <NavTabs/>}/>
                     <Route render={() => <h1>404</h1>}/>
                 </Switch>
             </container>
@@ -225,15 +245,15 @@ function App() {
 const handleSelect = withRouter(({history, match}) => {
     console.log(history);
     console.log(match);
-    history.push('/' + match.params.text)
+    history.push('/' + match.text)
 });
 
 const Admin = withRouter(({history, match}) => {
     console.log(history);
     console.log(match);
     return <div>
-        <h1>Admin Log in</h1>
-        <Button onClick={() => history.push("/")}>Til forside</Button>
+        <AdminNavTabs/>
+        <Button onClick={() => history.push("/")}>Ud af Admin</Button>
     </div>
 });
 
