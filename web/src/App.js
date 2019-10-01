@@ -11,31 +11,59 @@ import VehicleStore from "./stores/VehicleStore";
 import './App.css';
 import {Link} from "react-router-dom";
 import {FormControl, InputGroup} from "react-bootstrap";
-import {BootstrapTable} from "react-bootstrap-table-2";
+import BootstrapTable from 'react-bootstrap-table-next';
+import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 
 const vehicleStore = new VehicleStore();
 
 function SearchVehicle() {
-
     const columns = [{
-        dataField: 'id',
-        text: 'Product ID',
-        sort: true
+        dataField: 'brand',
+        text: 'Vehicle Brand',
+        sort: true,
+        filter: textFilter(),
+        headerFormatter: priceFormatter
     }, {
         dataField: 'name',
-        text: 'Product Name',
-        sort: true
+        text: 'Vehicle Name',
+        sort: true,
+        filter: textFilter(),
+        headerFormatter: priceFormatter
     }, {
         dataField: 'price',
-        text: 'Product Price'
+        text: 'Vehicle Price',
+        sort: true,
+        filter: textFilter(),
+        headerFormatter: priceFormatter
     }];
+    const defaultSorted = [{
+        dataField: 'name',
+        order: 'desc'
+    }];
+
     return (
-            <BootstrapTable keyField='id' data={ vehicleStore } columns={ columns } />
+        <BootstrapTable
+            keyField="id"
+            data={ vehicleStore.vehicles }
+            columns={ columns }
+            filter={ filterFactory() }
+            defaultSorted={ defaultSorted }
+        />
     );
 
 }
 
-function NewVehicle(){
+function priceFormatter(column, colIndex, { sortElement, filterElement }) {
+    return (
+        <div style={ { display: 'flex', flexDirection: 'column' } }>
+            { filterElement }
+            { column.text }
+            { sortElement }
+        </div>
+    );
+}
+
+function NewVehicle() {
     return (
         <Form>
             <Form.Group controlId="exampleForm.ControlInput1">
@@ -180,11 +208,12 @@ function App() {
         <div>
             <container>
                 <img src="https://i.imgur.com/bVMYcYR.png" className="Logo" alt="NoFoss Logo"/>
+                <NavTabs/>
             </container>
             <container>
                 <Switch>
                     <Route exact path={"/admin"} component={Admin}/>
-                    <Route exact path={"/"} render={() => <NavTabs/>}/>
+                    <Route exact path={"/"} render={() => <div></div>}/>
                     <Route render={() => <h1>404</h1>}/>
                 </Switch>
             </container>
