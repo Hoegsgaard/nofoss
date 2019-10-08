@@ -160,7 +160,7 @@ function CreateUser() {
     );
 }
 
-function CreateVehicle() {
+const CreateVehicle =observer(()=>{
     return (
         <section>
             <InputGroup className="mb-3">
@@ -198,7 +198,7 @@ function CreateVehicle() {
             <Button onClick={() => vehicleStore.vehicles.push({brand:vehicleStore.newBrand,name:vehicleStore.newName,price:vehicleStore.newPrice})}>Opret Køretøj</Button>
         </section>
     );
-}
+})
 
 function NavTabs() {
     return (
@@ -214,7 +214,7 @@ function NavTabs() {
     );
 }
 
-function AdminNavTabs() {
+const AdminNavTabs = observer( ()=> {
     return (
         <section>
             <Tabs defaultActiveKey="create" id="uncontrolled-tab-example">
@@ -224,7 +224,7 @@ function AdminNavTabs() {
             </Tabs>
         </section>
     );
-}
+});
 
 function App() {
     return (
@@ -251,13 +251,13 @@ const handleSelect = withRouter(({history, match}) => {
     history.push('/' + match.text)
 });
 
-const Admin = withRouter(({history, match}) => {
+const Admin = observer(withRouter(({history, match}) => {
     console.log(history);
     console.log(match);
     return <div>
         <AdminNavTabs/>
         <Button onClick={() => history.push("/")}>Ud af Admin</Button>
     </div>
-});
+}));
 
 export default observer(App);
