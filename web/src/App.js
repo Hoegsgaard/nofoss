@@ -256,7 +256,7 @@ const Admin = observer(withRouter(({history, match}) => {
     console.log(match);
     return <div>
         <AdminNavTabs/>
-        <Button onClick={() => history.push("/")}>Ud af Admin</Button>
+        <Button onClick={() => history.push("/")}>Til admin</Button>
     </div>
 }));
 
