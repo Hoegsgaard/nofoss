@@ -5,12 +5,14 @@ export default class VehicleStore{
         {brand: "Suzuki", name: "Swift", price: "1503000"},
         {brand: "Mercedes", name: "Stor-20", price: "35900000"}
     ];
-    newBrand = "123123";
+    newBrand = "";
     newName = "";
     newPrice = "";
 }
 
 decorate(VehicleStore,{
     vehicles: observable,
-    newVehicle: observable
+    newBrand: observable,
+    newName: observable,
+    newPrice: observable
 });
