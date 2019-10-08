@@ -50,7 +50,7 @@
                     <!-- Copy NPM build to java webapp folder -->
                     <plugin>
                         <artifactId>maven-resources-plugin</artifactId>
-                        <version>2.6</version>
+                        <version>3.1.0</version>
                         <executions>
                             <execution>
                                 <phase>validate</phase>
@@ -120,6 +120,12 @@
             <artifactId>activation</artifactId>
             <version>1.1</version>
         </dependency>
+        
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-json-jackson</artifactId>
+            <version>2.27</version>
+        </dependency>
 
 
         <!--Embedded Tomcat-->
@@ -134,6 +140,14 @@
             <artifactId>tomcat-embed-jasper</artifactId>
             <version>${tomcat.version}</version>
         </dependency>
+
+        <!-- mongoDB-->
+            <dependency>
+                <groupId>org.mongodb</groupId>
+                <artifactId>mongodb-driver-sync</artifactId>
+                <version>3.11.0</version>
+            </dependency>
+
     </dependencies>
 
     <build>
