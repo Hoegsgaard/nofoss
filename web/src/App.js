@@ -64,32 +64,6 @@ function priceFormatter(column, colIndex, { sortElement, filterElement }) {
     );
 }
 
-const LogIn = ()=> {
-    return (
-        <section>
-            <InputGroup>
-                <InputGroup.Prepend>
-                    <InputGroup.Text id="inputGroup-sizing-default">email</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                    aria-label="Default"
-                    aria-describedby="inputGroup-sizing-default"
-                />
-            </InputGroup>
-            <br/>
-            <InputGroup className="mb-3">
-                <InputGroup.Prepend>
-                    <InputGroup.Text id="inputGroup-sizing-default">password</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                    aria-label="Default"
-                    aria-describedby="inputGroup-sizing-default"
-                />
-            </InputGroup>
-            <Button>I DO NOTHING :)</Button>
-        </section>
-    )};
-
 function CreateUser() {
     return (
         <section>
@@ -116,6 +90,32 @@ function CreateUser() {
         </section>
     );
 }
+
+const LogIn = ()=> {
+    return (
+        <section>
+            <InputGroup>
+                <InputGroup.Prepend>
+                    <InputGroup.Text id="inputGroup-sizing-default">email</InputGroup.Text>
+                </InputGroup.Prepend>
+                <FormControl
+                    aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default"
+                />
+            </InputGroup>
+            <br/>
+            <InputGroup className="mb-3">
+                <InputGroup.Prepend>
+                    <InputGroup.Text id="inputGroup-sizing-default">password</InputGroup.Text>
+                </InputGroup.Prepend>
+                <FormControl
+                    aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default"
+                />
+            </InputGroup>
+            <Button>I DO NOTHING :)</Button>
+        </section>
+    )};
 
 
 
@@ -149,7 +149,7 @@ function App() {
             </container>
             <container>
                 <Switch>
-                    <Route exact path={"/login"} component={LogIn}/>
+                    <Route exact path={"/"} component={LogIn}/>
                     <Route exact path={"/home"} component={Temp}/>
                     <Route exact path={"/search"} component={SearchVehicle}/>
                     <Route exact path={"/create/vehicle"} component={CreateVehicle}/>
@@ -161,10 +161,9 @@ function App() {
     );
 }
 
-const Temp = observer(withRouter(({history, match}) => {
+const Temp = ()=> {
     return <div>
         <h1>TEMPTEMPTEMP</h1>
     </div>
-}));
-
+};
 export default observer(App);
