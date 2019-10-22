@@ -3,7 +3,7 @@ import BootstrapTable from "react-bootstrap-table-next";
 import {vehicleStore} from "../stores/VehicleStore";
 import React from "react";
 
-export function SearchVehicle() {
+export const SearchVehicle = ()=> {
     const columns = [{
         dataField: 'brand',
         text: 'Vehicle Brand',

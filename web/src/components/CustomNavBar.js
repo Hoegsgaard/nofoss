@@ -3,18 +3,16 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Form from "react-bootstrap/Form";
 import React from "react";
+import {userStore} from "../stores/UserStore";
 
- export const CustomNavBar = observer(()=> {
+export const CustomNavBar = observer(()=> {
     return (
         <>
             <Navbar bg="light" variant="light">
+
                 <Navbar.Brand href="#home">NoFoss</Navbar.Brand>
                 <Nav className="mr-auto">
-                    <Nav.Link href="#/">Login</Nav.Link>
-                    <Nav.Link href="#search">Søg Køretøj</Nav.Link>
-                    <Nav.Link href="#profile">Profile</Nav.Link>
-                    <Nav.Link href="#create/Vehicle">Nyt køretøj</Nav.Link>
-                    <Nav.Link href="#create/User">Ny bruger</Nav.Link>
+                    {userStore.adminNavBar.map((element)=><Nav.Link href={element.href}>{element.name}</Nav.Link>)}
                 </Nav>
                 <Form inline>
                     <container>
