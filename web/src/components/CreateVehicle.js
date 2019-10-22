@@ -2,7 +2,7 @@ import {observer} from "mobx-react";
 import {FormControl, InputGroup} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import React from "react";
-import {vehicleStore} from "./stores/VehicleStore";
+import {vehicleStore} from "../stores/VehicleStore";
 
 export const CreateVehicle = observer(()=>{
     return (

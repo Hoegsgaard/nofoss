@@ -17,4 +17,4 @@ decorate(VehicleStore,{
     newPrice: observable
 });
 
-export const vehicleStore = new vehicleStore();
+export const vehicleStore = new VehicleStore();
