@@ -13,6 +13,8 @@ import {Link} from "react-router-dom";
 import {FormControl, InputGroup} from "react-bootstrap";
 import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
 
 const vehicleStore = new VehicleStore();
 
@@ -63,51 +65,7 @@ function priceFormatter(column, colIndex, { sortElement, filterElement }) {
     );
 }
 
-function NewVehicle() {
-    return (
-        <Form>
-            <Form.Group controlId="exampleForm.ControlInput1">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="name@example.com"/>
-            </Form.Group>
-            <Form.Group controlId="exampleForm.ControlSelect1">
-                <Form.Label>Example select</Form.Label>
-                <Form.Control as="select">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </Form.Control>
-            </Form.Group>
-            <Form.Group controlId="exampleForm.ControlSelect2">
-                <Form.Label>Example multiple select</Form.Label>
-                <Form.Control as="select" multiple>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </Form.Control>
-            </Form.Group>
-            <Form.Group controlId="exampleForm.ControlTextarea1">
-                <Form.Label>Example textarea</Form.Label>
-                <Form.Control as="textarea" rows="3"/>
-            </Form.Group>
-        </Form>
-    );
-}
-
-function UserInfo() {
-    return (
-        <section>
-
-
-        </section>
-    );
-}
-
-function LogIn() {
+const LogIn = ()=> {
     return (
         <section>
             <InputGroup>
@@ -129,9 +87,9 @@ function LogIn() {
                     aria-describedby="inputGroup-sizing-default"
                 />
             </InputGroup>
+            <Button>I DO NOTHING :)</Button>
         </section>
-    );
-}
+    )};
 
 function CreateUser() {
     return (
@@ -160,7 +118,7 @@ function CreateUser() {
     );
 }
 
-const CreateVehicle =observer(()=>{
+const CreateVehicle = observer(()=>{
     return (
         <section>
             <InputGroup className="mb-3">
@@ -200,29 +158,25 @@ const CreateVehicle =observer(()=>{
     );
 })
 
-function NavTabs() {
+const NavBar = observer(()=> {
     return (
-        <Tabs defaultActiveKey="search" id="uncontrolled-tab-example">
-            <Tab eventKey="search" title="Søg køretøj">
-
-                <SearchVehicle/>
-            </Tab>
-            <Tab eventKey="profile" title="Profil">
-                <UserInfo/>
-            </Tab>
-        </Tabs>
-    );
-}
-
-const AdminNavTabs = observer( ()=> {
-    return (
-        <section>
-            <Tabs defaultActiveKey="create" id="uncontrolled-tab-example">
-                <Tab eventKey="create" title="Opret nyt køretøj">
-                    <CreateVehicle/>
-                </Tab>
-            </Tabs>
-        </section>
+        <>
+            <Navbar bg="light" variant="light">
+                <Navbar.Brand href="#home">NoFoss</Navbar.Brand>
+                <Nav className="mr-auto">
+                    <Nav.Link href="#login">Login</Nav.Link>
+                    <Nav.Link href="#search">Søg Køretøj</Nav.Link>
+                    <Nav.Link href="#profile">Profile</Nav.Link>
+                    <Nav.Link href="#create/Vehicle">Nyt køretøj</Nav.Link>
+                    <Nav.Link href="#create/User">Ny bruger</Nav.Link>
+                </Nav>
+                <Form inline>
+                    <container>
+                        <img src="https://i.imgur.com/bVMYcYR.png" className="Logo" alt="NoFoss Logo"/>
+                    </container>
+                </Form>
+            </Navbar>
+        </>
     );
 });
 
@@ -230,13 +184,15 @@ function App() {
     return (
         <div>
             <container>
-                <img src="https://i.imgur.com/bVMYcYR.png" className="Logo" alt="NoFoss Logo"/>
+                <NavBar/>
             </container>
             <container>
-
                 <Switch>
-                    <Route exact path={"/admin"} component={Admin}/>
-                    <Route exact path={"/"} render={() => <NavTabs/>}/>
+                    <Route exact path={"/login"} component={LogIn}/>
+                    <Route exact path={"/home"} component={Temp}/>
+                    <Route exact path={"/search"} component={SearchVehicle}/>
+                    <Route exact path={"/create/vehicle"} component={CreateVehicle}/>
+                    <Route exact path={"/create/user"} component={CreateUser}/>
                     <Route render={() => <h1>404</h1>}/>
                 </Switch>
             </container>
@@ -244,19 +200,9 @@ function App() {
     );
 }
 
-/* add to history TODO: fix - Ask Christian*/
-const handleSelect = withRouter(({history, match}) => {
-    console.log(history);
-    console.log(match);
-    history.push('/' + match.text)
-});
-
-const Admin = observer(withRouter(({history, match}) => {
-    console.log(history);
-    console.log(match);
+const Temp = observer(withRouter(({history, match}) => {
     return <div>
-        <AdminNavTabs/>
-        <Button onClick={() => history.push("/")}>Ud af Admin</Button>
+        <h1>TEMPTEMPTEMP</h1>
     </div>
 }));
 
