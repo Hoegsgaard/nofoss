@@ -1,29 +1,67 @@
-import {FormControl, InputGroup} from "react-bootstrap";
+import {Col, FormControl, InputGroup, Row} from "react-bootstrap";
 import React from "react";
 
 export function CreateUser() {
     return (
         <section>
-            <InputGroup className="mb-3">
-                <InputGroup.Prepend>
-                    <InputGroup.Text id="inputGroup-sizing-default">Default</InputGroup.Text>
-                </InputGroup.Prepend>
+            <Col><Row>
+                <text>Email</text>
+            </Row></Col>
+            <Col><Row><InputGroup className="mb-3">
                 <FormControl
                     aria-label="Default"
                     aria-describedby="inputGroup-sizing-default"
                 />
-            </InputGroup>
-            <br/>
-            <InputGroup className="mb-3">
+            </InputGroup></Row></Col>
+
+            <Col><Row>
+                <text>Password</text>
+            </Row></Col>
+            <Col><Row><InputGroup className="mb-3">
                 <FormControl
-                    placeholder="Recipient's username"
-                    aria-label="Recipient's username"
-                    aria-describedby="basic-addon2"
+                    aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default"
                 />
-                <InputGroup.Append>
-                    <InputGroup.Text id="basic-addon2">@example.com</InputGroup.Text>
-                </InputGroup.Append>
-            </InputGroup>
+            </InputGroup></Row></Col>
+            <Col><Row>
+                <text>Password Confirm</text>
+            </Row></Col>
+            <Col><Row><InputGroup className="mb-3">
+                <FormControl
+                    aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default"
+                />
+            </InputGroup></Row></Col>
+
+            <Col><Row>
+                <text>First Name</text>
+            </Row></Col>
+            <Col><Row><InputGroup className="mb-3">
+                <FormControl
+                    aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default"
+                />
+            </InputGroup></Row></Col>
+
+            <Col><Row>
+                <text>Last Name</text>
+            </Row></Col>
+            <Col><Row><InputGroup className="mb-3">
+                <FormControl
+                    aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default"
+                />
+            </InputGroup></Row></Col>
+
+            <Col><Row>
+                <text>Firm</text>
+            </Row></Col>
+            <Col><Row><InputGroup className="mb-3">
+                <FormControl
+                    aria-label="Default"
+                    aria-describedby="inputGroup-sizing-default"
+                />
+            </InputGroup></Row></Col>
         </section>
     );
 }

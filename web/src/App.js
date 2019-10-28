@@ -9,24 +9,24 @@ import {Home} from "./components/Home";
 import {CustomNavBar} from "./components/CustomNavBar";
 import {LogIn} from "./components/Login";
 import {SearchVehicle} from "./components/SearchVehicle";
+import {SearchVehicleNew} from "./components/SearchVehicleNew";
+import Container from "react-bootstrap/Container";
 
 function App() {
     return (
-        <div>
-            <container>
-                <CustomNavBar/>
-            </container>
-            <container>
+        /*Change to <div> til fill whole screen in width*/
+        <Container>
+            <CustomNavBar/>
                 <Switch>
                     <Route exact path={"/"} component={LogIn}/>
                     <Route exact path={"/home"} component={Home}/>
                     <Route exact path={"/search"} component={SearchVehicle}/>
                     <Route exact path={"/create/vehicle"} component={CreateVehicle}/>
                     <Route exact path={"/create/user"} component={CreateUser}/>
+                    <Route exact path={"/newSearch"} component={SearchVehicleNew}/>
                     <Route render={() => <h1>404</h1>}/>
                 </Switch>
-            </container>
-        </div>
+        </Container>
     );
 }
 
