@@ -10,24 +10,11 @@ import Button from "react-bootstrap/Button";
 
 export const CustomNavBar = observer(() => {
     return (
-       /* <Navbar expand="lg" style={{background: "#f0f0f0"}}>
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Navbar.Brand>NoFoss</Navbar.Brand>
-                <Nav className="mr-auto">
-                    {userStore.adminNavBar.map((element) => <Nav.Link href={element.href}>{element.name}</Nav.Link>)}
-                </Nav>
-                <Form inline>
-                    <container>
-                        <img src="https://i.imgur.com/bVMYcYR.png" className="Logo" alt="NoFoss Logo"/>
-                    </container>
-                </Form>
-            </Navbar.Collapse>
-        </Navbar>*/
-
         <Navbar bg="light" expand="lg">
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
+                    <Navbar.Brand>Nofoss</Navbar.Brand>
                     {userStore.adminNavBar.map((element) => <Nav.Link href={element.href}>{element.name}</Nav.Link>)}
                 </Nav>
             </Navbar.Collapse>
