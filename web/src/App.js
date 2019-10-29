@@ -5,17 +5,14 @@ import Route from "react-router-dom/es/Route";
 import './App.css';
 import {CreateVehicle} from "./components/CreateVehicle";
 import {CreateUser} from "./components/CreateUser";
-import {Home} from "./components/Home";
 import {CustomNavBar} from "./components/CustomNavBar";
 import {LogIn} from "./components/Login";
-import {SearchVehicle} from "./components/SearchVehicle";
 import {SearchVehicleNew} from "./components/SearchVehicleNew";
 import Container from "react-bootstrap/Container";
 import {Profile} from "./components/Profile";
 
 function App() {
     return (
-        /*Change to <div> til fill whole screen in width*/
         <Container>
             <CustomNavBar/>
                 <Switch>
@@ -24,7 +21,7 @@ function App() {
                     <Route exact path={"/create/vehicle"} component={CreateVehicle}/>
                     <Route exact path={"/create/user"} component={CreateUser}/>
                     <Route exact path={"/profile"} component={Profile}/>
-                    <Route exact={"#/"} component={SearchVehicleNew}/>
+                    <Route exact path={"/"} component={SearchVehicleNew}/>
                     <Route render={() => <h1>404</h1>}/>
                 </Switch>
         </Container>
@@ -32,4 +29,3 @@ function App() {
 }
 
 export default observer(App);
-// :O

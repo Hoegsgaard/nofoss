@@ -12,7 +12,7 @@ import Container from "react-bootstrap/Container";
 
 export const CustomNavBar = observer(() => {
     return (
-        <Container >
+        <Container>
             <Row>
                 <Col md={{span: 8, offset: 0}}>
                     <Navbar bg="light" expand="lg">

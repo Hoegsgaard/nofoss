@@ -1,9 +1,5 @@
-import {observable} from "mobx";
-import {observer} from "mobx-react";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Container from "react-bootstrap/Container";
 import React from "react";
+import {observer} from "mobx-react";
 
 export const Profile = observer(()=>{
     return(

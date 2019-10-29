@@ -1,5 +1,5 @@
 AppConfig.class
-TestService.class
 MongoService.class
+TestService.class
 main.class
 MongoConnector.class

@@ -1,23 +1,29 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
+import {Col, Row} from "react-bootstrap";
 
-/* https://react-bootstrap.github.io/components/cards/ */
-export const SearchVehicle = () => {
-    return(
+export function CarCard({name,brand,price,fuelType,maxWeight,maxRange,imageLink}) {
+    return (
         <Card>
-            <Card.Header>Quote</Card.Header>
-            <Card.Body>
-                <blockquote className="blockquote mb-0">
-                    <p>
-                        {' '}
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere
-                        erat a ante.{' '}
-                    </p>
-                    <footer className="blockquote-footer">
-                        Someone famous in <cite title="Source Title">Source Title</cite>
-                    </footer>
-                </blockquote>
-            </Card.Body>
+            <Row>
+                <Col md={{span: 4, offset: 0}}>
+                    <Card.Header>{brand} - {name}</Card.Header>
+                    <Card.Body>
+                        <img style={{width: '100%'}} src={imageLink} alt="Billede af bil"/>
+                    </Card.Body>
+                </Col>
+                <Col>
+                    <Card.Body>
+                        Pris: {price} kr.
+                        <br/>
+                        Totalvægt: {maxWeight} kg.
+                        <br/>
+                        Total rækkevidde: {maxRange} km.
+                        <br/>
+                        Brændstof: {fuelType}.
+                    </Card.Body>
+                </Col>
+            </Row>
         </Card>
     )
 }
