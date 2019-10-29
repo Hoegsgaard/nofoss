@@ -14,7 +14,7 @@ export const CustomNavBar = observer(() => {
     return (
         <Container >
             <Row>
-                <Col md={{span: 11, offset: 0}}>
+                <Col md={{span: 8, offset: 0}}>
                     <Navbar bg="light" expand="lg">
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
@@ -25,7 +25,7 @@ export const CustomNavBar = observer(() => {
                         </Navbar.Collapse>
                     </Navbar>
                 </Col>
-                <Col md={{span: 1, offset:0}} className="d-none d-lg-block">
+                <Col md={{span: 4, offset:0}} className="d-none d-lg-block">
                     <img src="https://i.imgur.com/bVMYcYR.png" className="Logo" alt="NoFoss Logo"/>
                 </Col>
             </Row>
