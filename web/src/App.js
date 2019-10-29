@@ -16,7 +16,7 @@ import {Profile} from "./components/Profile";
 function App() {
     return (
         /*Change to <div> til fill whole screen in width*/
-        <div>
+        <Container>
             <CustomNavBar/>
                 <Switch>
                     <Route exact path={"/"} component={LogIn}/>
@@ -28,7 +28,7 @@ function App() {
                     <Route exact path={"/profile"} component={Profile}/>
                     <Route render={() => <h1>404</h1>}/>
                 </Switch>
-        </div>
+        </Container>
     );
 }
 

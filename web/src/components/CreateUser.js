@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 
 export function CreateUser() {
     return (
-        <div style={{padding: '20pt'}}>
+        <div >
             <Container>
                 <Row><Col md={{span: 6, offset: 3}} style={{
                     background: '#fff',

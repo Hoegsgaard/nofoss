@@ -7,20 +7,29 @@ import {userStore} from "../stores/UserStore";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import FormControl from "react-bootstrap/FormControl";
 import Button from "react-bootstrap/Button";
+import {Col, Row} from "react-bootstrap";
+import Container from "react-bootstrap/Container";
 
 export const CustomNavBar = observer(() => {
     return (
-        <Navbar bg="light" expand="lg">
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto">
-                    <Navbar.Brand>Nofoss</Navbar.Brand>
-                    {userStore.adminNavBar.map((element) => <Nav.Link href={element.href}>{element.name}</Nav.Link>)}
-                </Nav>
-            </Navbar.Collapse>
-            <container>
-                <img src="https://i.imgur.com/bVMYcYR.png" className="Logo" alt="NoFoss Logo"/>
-            </container>
-        </Navbar>
+        <Container >
+            <Row>
+                <Col md={{span: 11, offset: 0}}>
+                    <Navbar bg="light" expand="lg">
+                        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                        <Navbar.Collapse id="basic-navbar-nav">
+                            <Nav className="mr-auto">
+                                <Navbar.Brand>Nofoss</Navbar.Brand>
+                                {userStore.adminNavBar.map((element) => <Nav.Link href={element.href}>{element.name}</Nav.Link>)}
+                            </Nav>
+                        </Navbar.Collapse>
+                    </Navbar>
+                </Col>
+                <Col md={{span: 1, offset:0}} className="d-none d-lg-block">
+                    <img src="https://i.imgur.com/bVMYcYR.png" className="Logo" alt="NoFoss Logo"/>
+                </Col>
+            </Row>
+        </Container>
+
     );
 });
