@@ -11,11 +11,12 @@ import {LogIn} from "./components/Login";
 import {SearchVehicle} from "./components/SearchVehicle";
 import {SearchVehicleNew} from "./components/SearchVehicleNew";
 import Container from "react-bootstrap/Container";
+import {Profile} from "./components/Profile";
 
 function App() {
     return (
         /*Change to <div> til fill whole screen in width*/
-        <Container>
+        <div>
             <CustomNavBar/>
                 <Switch>
                     <Route exact path={"/"} component={LogIn}/>
@@ -24,9 +25,10 @@ function App() {
                     <Route exact path={"/create/vehicle"} component={CreateVehicle}/>
                     <Route exact path={"/create/user"} component={CreateUser}/>
                     <Route exact path={"/newSearch"} component={SearchVehicleNew}/>
+                    <Route exact path={"/profile"} component={Profile}/>
                     <Route render={() => <h1>404</h1>}/>
                 </Switch>
-        </Container>
+        </div>
     );
 }
 

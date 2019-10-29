@@ -1,5 +1,6 @@
 class UserStore{
-    adminNavBar = [{href:"#/",name:"Login"},
+    adminNavBar = [
+        {href:"#/",name:"Login"},
         {href:"#/search",name:"Søg Køretøj"},
         {href:"#/profile",name:"Profil"},
         {href:"#/create/vehicle",name:"Nyt køretøj"},
