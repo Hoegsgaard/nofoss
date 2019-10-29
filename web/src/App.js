@@ -19,12 +19,12 @@ function App() {
         <Container>
             <CustomNavBar/>
                 <Switch>
-                    <Route exact path={"/"} component={LogIn}/>
-                    <Route exact path={"/home"} component={Home}/>
+                    <Route exact path={"/login"} component={LogIn}/>
                     <Route exact path={"/search"} component={SearchVehicleNew}/>
                     <Route exact path={"/create/vehicle"} component={CreateVehicle}/>
                     <Route exact path={"/create/user"} component={CreateUser}/>
                     <Route exact path={"/profile"} component={Profile}/>
+                    <Route exact={"#/"} component={SearchVehicleNew}/>
                     <Route render={() => <h1>404</h1>}/>
                 </Switch>
         </Container>

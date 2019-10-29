@@ -19,7 +19,7 @@ export const CustomNavBar = observer(() => {
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="mr-auto">
-                                <Navbar.Brand>Nofoss</Navbar.Brand>
+                                <Navbar.Brand href={'#/search'}>Nofoss</Navbar.Brand>
                                 {userStore.adminNavBar.map((element) => <Nav.Link href={element.href}>{element.name}</Nav.Link>)}
                             </Nav>
                         </Navbar.Collapse>
