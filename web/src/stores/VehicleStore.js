@@ -24,3 +24,4 @@ decorate(VehicleStore,{
 });
 
 export const vehicleStore = new VehicleStore();
+// >:(
