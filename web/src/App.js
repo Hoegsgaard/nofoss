@@ -21,10 +21,9 @@ function App() {
                 <Switch>
                     <Route exact path={"/"} component={LogIn}/>
                     <Route exact path={"/home"} component={Home}/>
-                    <Route exact path={"/search"} component={SearchVehicle}/>
+                    <Route exact path={"/search"} component={SearchVehicleNew}/>
                     <Route exact path={"/create/vehicle"} component={CreateVehicle}/>
                     <Route exact path={"/create/user"} component={CreateUser}/>
-                    <Route exact path={"/newSearch"} component={SearchVehicleNew}/>
                     <Route exact path={"/profile"} component={Profile}/>
                     <Route render={() => <h1>404</h1>}/>
                 </Switch>
