@@ -73,7 +73,9 @@ export function CreateUser() {
 
                         <Row><Col md={{span: 10, offset: 1}}>
                             <Button style={{
-                                width: '100%'
+                                width: '100%',
+                                background:'#637724',
+                                borderColor:'#637724'
                             }}>Opret bruger</Button>
                         </Col></Row>
                     </Container>

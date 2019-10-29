@@ -1,10 +1,9 @@
 class UserStore{
     adminNavBar = [
-        {href:"#/",name:"Login"},
-        {href:"#/search",name:"Søg Køretøj"},
+        {href:"#/search",name:"Søg køretøj"},
+        {href:"#/create/vehicle",name:"Opret køretøj"},
         {href:"#/profile",name:"Profil"},
-        {href:"#/create/vehicle",name:"Nyt køretøj"},
-        {href:"#/newSearch",name:"Søg køretøj ny"}];
+        {href:"#/",name:"Login"}];
 }
 
 export const userStore = new UserStore();

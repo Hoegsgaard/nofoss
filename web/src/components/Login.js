@@ -44,7 +44,8 @@ export const LogIn = () => {
                                 }}>Login</Button>
                             </Col>
                             <Col md={{span: 5, offset: 0}}>
-                                <Button href="#/create/User" style={{
+                                <Button href="#/create/User"
+                                        style={{
                                     width: '100%',
                                     background: '#fff',
                                     border: '1px solid',
