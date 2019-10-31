@@ -1,7 +1,7 @@
 import React from 'react';
 import {observer} from "mobx-react";
-import Switch from "react-router-dom/es/Switch";
-import Route from "react-router-dom/es/Route";
+import {Switch} from "react-router";
+import {Route} from "react-router-dom"
 import './App.css';
 import {CreateVehicle} from "./components/CreateVehicle";
 import {CreateUser} from "./components/CreateUser";

@@ -2,7 +2,8 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import {Col, Row} from "react-bootstrap";
 
-export function CarCard({name,brand,price,fuelType,maxWeight,maxRange,imageLink}) {
+export function CarCard({Car}) {
+    const {name,brand,price,fuelType,maxWeight,maxRange,imageLink} = Car
     return (
         <Card>
             <Row>
