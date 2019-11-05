@@ -84,6 +84,25 @@
     </profiles>
 
     <dependencies>
+        <!-- MongoMapper -->
+        <dependency>
+            <groupId>dev.morphia.morphia</groupId>
+            <artifactId>core</artifactId>
+            <version>1.5.4</version>
+        </dependency>
+        <!--Lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--JJWT til at lave JSON-webtokens-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.7.0</version>
+        </dependency>
         <!-- Rest Spec -->
         <dependency>
             <groupId>javax.ws.rs</groupId>
