@@ -1,5 +1,13 @@
 AppConfig.class
 MongoService.class
-TestService.class
 main.class
+TokenEndPoint$LoginService.class
+JWTHandler.class
+TestService.class
+TokenEndPoint.class
+User.class
+TokenEndPoint$NotAuthorizedException.class
+User$UserBuilder.class
+TokenEndPoint$NotAuthorizedExceptionMapper.class
+LoginData.class
 MongoConnector.class
