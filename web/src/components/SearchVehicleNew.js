@@ -13,24 +13,23 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 export const SearchVehicleNew = () => {
 
+    const [value, setValue] = React.useState([0, 100]);
+    const brandArray = vehicleStore.brands
+    const cardArray = []
+
+    /*For each vehicle we insert data in arrays to do further work it*/
+    vehicleStore.vehicles.map(vehicle => (
+
+        /*Here should be a filter to only insert the cards passing the filter into the cardArray*/
+        cardArray.push(<CarCard Car={vehicle}/>)
+    ));
+
     /*Contains checkbox boolean setting TODO: implement these with brandArray*/
     const [state, setState] = React.useState({
         Volvo:true,
         Mercedes:true,
         Ford:true
     });
-    const [value, setValue] = React.useState([0, 100]);
-    const brandArray = []
-    const cardArray = []
-
-    /*For each vehicle we insert data in arrays to do further work it*/
-    vehicleStore.vehicles.map(vehicle => (
-        brandArray.push(vehicle.brand),
-
-        /*Here should be a filter to only insert the cards passing the filter into the cardArray*/
-
-        cardArray.push(<CarCard Car={vehicle}/>)
-    ));
 
     const checkboxChange = name => event => {
         setState({...state, [name]: event.target.checked});
@@ -45,8 +44,8 @@ export const SearchVehicleNew = () => {
         <FormControlLabel
             control={
                 <Checkbox
-                    checked={state.Volvo}
-                    onChange={checkboxChange("Volvo")}
+                    checked={true}
+                    onChange={checkboxChange(brand)}
                     value={brand}
                 />
             }
