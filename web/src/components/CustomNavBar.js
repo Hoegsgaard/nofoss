@@ -12,14 +12,14 @@ import Container from "react-bootstrap/Container";
 
 export const CustomNavBar = observer(() => {
     return (
-        <Container >
+        <Container>
             <Row>
                 <Col md={{span: 8, offset: 0}}>
                     <Navbar bg="light" expand="lg">
                         <Navbar.Toggle aria-controls="basic-navbar-nav" />
                         <Navbar.Collapse id="basic-navbar-nav">
                             <Nav className="mr-auto">
-                                <Navbar.Brand>Nofoss</Navbar.Brand>
+                                <Navbar.Brand href={'#/search'}>Nofoss</Navbar.Brand>
                                 {userStore.adminNavBar.map((element) => <Nav.Link href={element.href}>{element.name}</Nav.Link>)}
                             </Nav>
                         </Navbar.Collapse>

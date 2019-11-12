@@ -36,3 +36,4 @@ public class main{
         this.text = text;
     }
 }
+// :)
