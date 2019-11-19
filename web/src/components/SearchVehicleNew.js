@@ -4,9 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import {vehicleStore} from "../stores/VehicleStore";
 import {CarCard} from "./CarCard";
-import Button from "react-bootstrap/Button";
 import {FormControl, InputGroup} from "react-bootstrap";
-import Slider from "@material-ui/core/Slider/Slider";
 import Typography from "@material-ui/core/Typography/Typography";
 import Checkbox from "@material-ui/core/Checkbox/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -31,7 +29,7 @@ export const SearchVehicleNew = observer(() => {
         setValue(newValue);
     };
 
-    const checkBoxArray = vehicleStore.brands.map((brand, key) =>
+    const brandBoxArray = vehicleStore.brands.map((brand, key) =>
         <FormControlLabel key={key}
                           control={
                               <Checkbox
@@ -56,15 +54,39 @@ export const SearchVehicleNew = observer(() => {
         />
     )
 
+    const fuelBoxArray = vehicleStore.fuelType.map((brand, key) =>
+        <FormControlLabel key={key}
+                          control={
+                              <Checkbox
+                                  //checked={true}
+                                  //onChange={checkboxChange(brand)}
+                                  value={brand}
+                                  onChange={(e) => {
+                                      if (e.target.checked) {
+                                          vehicleStore.selectedFuelTypes.push(brand)
+                                          console.log(vehicleStore.selectedFuelTypes)
+                                      } else {
+                                          var index = vehicleStore.selectedFuelTypes.indexOf(e.target.value);
+                                          if (index > -1) {
+                                              vehicleStore.selectedFuelTypes.splice(index, 1);
+                                          }
+                                      }
+                                  }
+                                  }
+                              />
+                          }
+                          label={brand}
+        />
+    )
+
     return (
         <Container>
             <Row>
                 <Col>
                     <Typography gutterBottom>Mærke</Typography>
                     <Row>
-                        {checkBoxArray}
+                        {brandBoxArray}
                     </Row>
-
                     <Typography gutterBottom>Navn</Typography>
                     <Row>
                         <InputGroup className="mb-3">
@@ -114,6 +136,9 @@ export const SearchVehicleNew = observer(() => {
                     <Row>
                         <Col>
                             <InputGroup className="mb-3">
+                                <InputGroup.Append>
+                                    <InputGroup.Text id="basic-addon2">min</InputGroup.Text>
+                                </InputGroup.Append>
                                 <FormControl
                                     aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default"
@@ -126,6 +151,9 @@ export const SearchVehicleNew = observer(() => {
                         </Col>
                         <Col>
                             <InputGroup className="mb-3">
+                                <InputGroup.Append>
+                                    <InputGroup.Text id="basic-addon2">max</InputGroup.Text>
+                                </InputGroup.Append>
                                 <FormControl
                                     aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default"
@@ -137,12 +165,16 @@ export const SearchVehicleNew = observer(() => {
                             </InputGroup>
                         </Col>
                     </Row>
-
+                    <Typography gutterBottom>Drivmiddel</Typography>
+                    <Row>
+                        {fuelBoxArray}
+                    </Row>
                 </Col>
-                <Col xs={8}>{vehicleStore.filteredVehicles.map(vehicle =>
-                    /*Here should be a filter to only insert the cards passing the filter into the cardArray*/
-                    <CarCard Car={vehicle}/>
-                )}</Col>
+                <Col xs={8} style={{overflow: 'scroll'}}>
+                        {vehicleStore.filteredVehicles.map(vehicle =>
+                            /*Here should be a filter to only insert the cards passing the filter into the cardArray*/
+                            <CarCard Car={vehicle}/>)}
+                </Col>
             </Row>
         </Container>
     )
