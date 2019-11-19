@@ -22,7 +22,7 @@ public class TokenEndPoint {
         throw new NotAuthorizedException("forkert brugernavn/kodeord");
     }
 
-    @POST
+    @GET
     @Path("tokentest")
     public String postToken(String token){
         User validate = null;
