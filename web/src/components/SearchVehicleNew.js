@@ -15,14 +15,6 @@ import {observer} from "mobx-react";
 export const SearchVehicleNew = observer(() => {
 
     const [value, setValue] = React.useState([0, 100]);
-    //const brandArray = vehicleStore.brands
-
-    /*For each vehicle we insert data in arrays to do further work it*/
-    //vehicleStore.vehicles.map(vehicle => (
-
-        /*Here should be a filter to only insert the cards passing the filter into the cardArray*/
-   //     cardArray.push(<CarCard Car={vehicle}/>)
-    //));
 
     /*Contains checkbox boolean setting TODO: implement these with brandArray*/
     const [state, setState] = React.useState({
@@ -39,7 +31,6 @@ export const SearchVehicleNew = observer(() => {
         setValue(newValue);
     };
 
-    /*TODO: change checkboxChange reference and checked reference to {brand}-object instead of hardcoded string.  */
     const checkBoxArray = vehicleStore.brands.map((brand,key) =>
         <FormControlLabel key={key}
             control={
@@ -80,16 +71,6 @@ export const SearchVehicleNew = observer(() => {
                             onChange={ (e) => vehicleStore.searchName = e.target.value}
                         />
                     </InputGroup>
-
-                    <Typography id="range-slider" gutterBottom>Pris</Typography>
-                    <Slider
-                        value={value}
-                        valueLabelDisplay="auto"
-                        aria-labelledby="range-slider"
-                        onChange={sliderChange}
-                        aria-valuemax={1000000}
-                        aria-valuemin={10}
-                    />
 
                     <Typography gutterBottom>Max vægt</Typography>
                     <InputGroup className="mb-3">

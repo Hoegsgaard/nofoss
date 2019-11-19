@@ -38,7 +38,7 @@ class VehicleStore{
         return (
             vehicleStore.vehicles.filter(vehicle =>
                 ((this.selectedBrands.length <=1 || this.selectedBrands.includes(vehicle.brand))
-                    && vehicle.name.includes(this.searchName)
+                    && vehicle.name.toLowerCase().includes(this.searchName.toLowerCase())
                     && ((this.searchWeight == 0.0) || Number(vehicle.maxWeight) <= Number(this.searchWeight))
                     && ((this.searchRange == 0.0) || Number(vehicle.maxRange) <= Number(this.searchRange)))
             )

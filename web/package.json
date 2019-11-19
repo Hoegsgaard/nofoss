@@ -13,7 +13,8 @@
     "react-router": "latest",
     "react-router-dom": "latest",
     "react-scripts": "3.1.1",
-    "@material-ui/core": "latest"
+    "@material-ui/core": "latest",
+    "underscore": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
