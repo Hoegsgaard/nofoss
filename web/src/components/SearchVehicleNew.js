@@ -18,9 +18,9 @@ export const SearchVehicleNew = observer(() => {
 
     /*Contains checkbox boolean setting TODO: implement these with brandArray*/
     const [state, setState] = React.useState({
-        Volvo:true,
-        Mercedes:true,
-        Ford:true
+        Volvo: true,
+        Mercedes: true,
+        Ford: true
     });
 
     const checkboxChange = name => event => {
@@ -31,28 +31,28 @@ export const SearchVehicleNew = observer(() => {
         setValue(newValue);
     };
 
-    const checkBoxArray = vehicleStore.brands.map((brand,key) =>
+    const checkBoxArray = vehicleStore.brands.map((brand, key) =>
         <FormControlLabel key={key}
-            control={
-                <Checkbox
-                    //checked={true}
-                    //onChange={checkboxChange(brand)}
-                    value={brand}
-                    onChange = {(e) => {
-                        if(e.target.checked){
-                            vehicleStore.selectedBrands.push(brand)
-                            console.log(vehicleStore.selectedBrands)
-                        }else{
-                            var index = vehicleStore.selectedBrands.indexOf(e.target.value);
-                            if (index > -1) {
-                                vehicleStore.selectedBrands.splice(index, 1);
-                            }
-                        }
-                        }
-                    }
-                />
-            }
-            label={brand}
+                          control={
+                              <Checkbox
+                                  //checked={true}
+                                  //onChange={checkboxChange(brand)}
+                                  value={brand}
+                                  onChange={(e) => {
+                                      if (e.target.checked) {
+                                          vehicleStore.selectedBrands.push(brand)
+                                          console.log(vehicleStore.selectedBrands)
+                                      } else {
+                                          var index = vehicleStore.selectedBrands.indexOf(e.target.value);
+                                          if (index > -1) {
+                                              vehicleStore.selectedBrands.splice(index, 1);
+                                          }
+                                      }
+                                  }
+                                  }
+                              />
+                          }
+                          label={brand}
         />
     )
 
@@ -61,45 +61,87 @@ export const SearchVehicleNew = observer(() => {
             <Row>
                 <Col>
                     <Typography gutterBottom>Mærke</Typography>
-                    {checkBoxArray}
+                    <Row>
+                        {checkBoxArray}
+                    </Row>
 
                     <Typography gutterBottom>Navn</Typography>
-                    <InputGroup className="mb-3">
-                        <FormControl
-                            aria-label="Default"
-                            aria-describedby="inputGroup-sizing-default"
-                            onChange={ (e) => vehicleStore.searchName = e.target.value}
-                        />
-                    </InputGroup>
+                    <Row>
+                        <InputGroup className="mb-3">
+                            <FormControl
+                                aria-label="Default"
+                                aria-describedby="inputGroup-sizing-default"
+                                onChange={(e) => vehicleStore.searchName = e.target.value}
+                            />
+                        </InputGroup>
+                    </Row>
 
-                    <Typography gutterBottom>Max vægt</Typography>
-                    <InputGroup className="mb-3">
-                        <FormControl
-                            aria-label="Default"
-                            aria-describedby="inputGroup-sizing-default"
-                            onChange={(e) => vehicleStore.searchWeight = e.target.value}
-                        />
-                        <InputGroup.Append>
-                            <InputGroup.Text id="basic-addon2">kg.</InputGroup.Text>
-                        </InputGroup.Append>
-                    </InputGroup>
+                    <Typography gutterBottom>Vægt</Typography>
+                    <Row>
+                        <Col>
+                            <InputGroup className="mb-3">
+                                <InputGroup.Append>
+                                    <InputGroup.Text id="basic-addon2">min</InputGroup.Text>
+                                </InputGroup.Append>
+                                <FormControl
+                                    aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    onChange={(e) => vehicleStore.searchMinWeight = e.target.value}
+                                />
+                                <InputGroup.Append>
+                                    <InputGroup.Text id="basic-addon2">kg.</InputGroup.Text>
+                                </InputGroup.Append>
+                            </InputGroup>
+                        </Col>
+                        <Col>
+                            <InputGroup className="mb-3">
+                                <InputGroup.Append>
+                                    <InputGroup.Text id="basic-addon2">max</InputGroup.Text>
+                                </InputGroup.Append>
+                                <FormControl
+                                    aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    onChange={(e) => vehicleStore.searchMaxWeight = e.target.value}
+                                />
+                                <InputGroup.Append>
+                                    <InputGroup.Text id="basic-addon2">kg.</InputGroup.Text>
+                                </InputGroup.Append>
+                            </InputGroup>
+                        </Col>
+                    </Row>
 
-                    <Typography gutterBottom>Max rækkevidde</Typography>
-                    <InputGroup className="mb-3">
-                        <FormControl
-                            aria-label="Default"
-                            aria-describedby="inputGroup-sizing-default"
-                            onChange={(e) => vehicleStore.searchRange = e.target.value}
-                        />
-                        <InputGroup.Append>
-                            <InputGroup.Text id="basic-addon2">km.</InputGroup.Text>
-                        </InputGroup.Append>
-                    </InputGroup>
+                    <Typography gutterBottom>Rækkevidde</Typography>
+                    <Row>
+                        <Col>
+                            <InputGroup className="mb-3">
+                                <FormControl
+                                    aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    onChange={(e) => vehicleStore.searchMinRange = e.target.value}
+                                />
+                                <InputGroup.Append>
+                                    <InputGroup.Text id="basic-addon2">km.</InputGroup.Text>
+                                </InputGroup.Append>
+                            </InputGroup>
+                        </Col>
+                        <Col>
+                            <InputGroup className="mb-3">
+                                <FormControl
+                                    aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    onChange={(e) => vehicleStore.searchMaxRange = e.target.value}
+                                />
+                                <InputGroup.Append>
+                                    <InputGroup.Text id="basic-addon2">km.</InputGroup.Text>
+                                </InputGroup.Append>
+                            </InputGroup>
+                        </Col>
+                    </Row>
 
                 </Col>
                 <Col xs={8}>{vehicleStore.filteredVehicles.map(vehicle =>
-                        /*Here should be a filter to only insert the cards passing the filter into the cardArray*/
-                        <CarCard Car={vehicle}/>
+                    /*Here should be a filter to only insert the cards passing the filter into the cardArray*/
+                    <CarCard Car={vehicle}/>
                 )}</Col>
             </Row>
         </Container>
