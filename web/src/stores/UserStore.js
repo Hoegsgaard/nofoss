@@ -1,5 +1,18 @@
-const loginStates = {LOGGING_IN:"loading", LOGGED_OUT:"logout", LOGGED_IN:"LoggedIn"};
+import Agent, {agent} from "./Agent";
+import {decorate, observable} from "mobx";
+import {observer} from "mobx-react";
+
+
 class UserStore{
+
+    constructor(){
+        let nofossToken = localStorage.getItem("NofossToken");
+        if (nofossToken){
+            this.state = this.loginStates.LOGGED_IN;
+        }
+    }
+    loginStates = {LOGGING_IN:"loading", LOGGED_OUT:"logout", LOGGED_IN:"LoggedIn"};
+
     adminNavBar = [
         {href:"#/search",name:"Søg køretøj"},
         {href:"#/create/vehicle",name:"Opret køretøj"},
@@ -8,29 +21,18 @@ class UserStore{
 
     loginData={username:"",password:""};
     token = null;
-    state = loginStates.LOGGED_OUT;
+    state = this.loginStates.LOGGED_OUT;
 
     doLogin(){
-        this.state = loginStates.LOGGING_IN;
-        fetch("http://localhost:3000/#/rest/login",{
-            method:"POST",
-            body:JSON.stringify(this.loginData),
-            headers:{
-                "Content-Type": "application/json"
-            }
-        }).then(
-            (response)=> {
-                response.text().then(
-                    (token)=>{
-                        this.token=token;
-                        localStorage.setItem("NofossToken",token);
-                        this.state = loginStates.LOGGED_IN;
-                        console.log(token)
-                    }
-                )
-            }
-        ).catch(()=> this.state = loginStates.LOGGED_OUT);
+        console.log("Login gogo");
+        agent.doLogin(this.loginData);
+
+
     }
 }
+
+decorate(UserStore,{
+    state:observable
+})
 
 export const userStore = new UserStore();

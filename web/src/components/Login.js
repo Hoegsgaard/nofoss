@@ -40,7 +40,7 @@ export const LogIn = () => {
 
                         <Row>
                             <Col md={{span: 5, offset: 1}}>
-                                <Button onClick={userStore.doLogin()} style={{
+                                <Button onClick={login} style={{
                                     width: '100%',
                                     background:'#637724',
                                     borderColor:'#637724'
@@ -63,3 +63,7 @@ export const LogIn = () => {
         </div>
     )
 };
+
+function login() {
+    userStore.doLogin();
+}

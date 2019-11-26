@@ -1,37 +1,44 @@
 package rest;
 
+import javax.annotation.PostConstruct;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 @Path("login")
-//@Produces(MediaType.APPLICATION_JSON)
-//@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class TokenEndPoint {
 
-    @GET
-    public String test(){
-        return "Test";
-    }
+/*
+[FATAL] A resource model has ambiguous (sub-)resource method for HTTP method POST and input mime-types as defined
+by"@Consumes" and "@Produces" annotations at Java methods
+public java.lang.String rest.TokenEndPoint.postLoginData(rest.LoginData) throws javax.ws.rs.NotAuthorizedException and
+public java.lang.String TokenEndPoint$LoginService.postLoginData(LoginData) throws TokenEndPoint$NotAuthorizedException
+  at matching regular expression /login.
+  These two methods produces and consumes exactly the same mime-types and therefore their invocation as a resource methods will always fail.; source='org.glassfish.jersey.server.model.RuntimeResource@3c130cb2']
+
+ */
 
     @POST
-    public String postLoginData(LoginData login) throws NotAuthorizedException{
-        if (login!=null && "brian".equals(login.getUsername()) && "kodeord".equals(login.getPassword())){
+    public String postLoginDataxx(LoginData login) throws NotAuthorizedException {
+        if (login != null && "nofoss".equals(login.getUsername()) && "kodeord".equals(login.getPassword())) {
             return JWTHandler.generateJwtToken(new User(login.getUsername(), ""/*new ObjectId("5dc0ad700000000000000000")*/));
         }
         throw new NotAuthorizedException("forkert brugernavn/kodeord");
     }
+}
+/*
 
-    @GET
+
+
+    @POST
     @Path("tokentest")
-    public String postToken(String token){
-        User validate = null;
-        try {
+    public String getToken(String token){
+            User validate = null;
             validate = JWTHandler.validate(token);
-        } catch (NotAuthorizedException e) {
-            e.printStackTrace();
-        }
-        return validate.toString();
+            return validate.toString();
     }
 }
 
@@ -49,3 +56,5 @@ class NotAuthorizedExceptionMapper implements ExceptionMapper<NotAuthorizedExcep
         return Response.status(Response.Status.UNAUTHORIZED).entity(e.getMessage()).build();
     }
 }
+*/
+
