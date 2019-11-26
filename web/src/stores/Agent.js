@@ -18,20 +18,11 @@ class Agent {
                         userStore.token=token;
                         localStorage.setItem("NofossToken",token);
                         userStore.state = userStore.loginStates.LOGGED_IN;
-                        console.log(token)
-                        this.startTokenCheck();
+                        userStore.startTokenCheck();
                     }
                 )
             }
         ).catch(()=> this.state = userStore.loginStates.LOGGED_OUT);
-    }
-
-    startTokenCheck() {
-        let tokenString = userStore.token.atob()
-        const tokenExpiry = // Get  time from token
-        setTimeout(()=>{
-            // CheckToken
-        }, tokenExpiry)
     }
 
     async getVehicles(){

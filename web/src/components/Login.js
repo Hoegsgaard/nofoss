@@ -32,6 +32,7 @@ export const LogIn = () => {
                             <text>Password</text>
                             <InputGroup className="mb-3">
                                 <FormControl
+                                    type="password"
                                     aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default"
                                     onChange={(e) => userStore.loginData.password = e.target.value}

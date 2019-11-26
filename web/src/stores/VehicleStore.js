@@ -32,10 +32,6 @@ class VehicleStore{
     searchMaxRange = 0.0;
 
     get filteredVehicles(){
-        console.log("SearchWeight" + this.searchMinWeight);
-        console.log("SearchWeight" + this.searchMaxWeight);
-        console.log("SearchWeight" + this.searchMinRange);
-        console.log("SearchWeight" + this.searchMaxRange);
         return (
             vehicleStore.vehicles.filter(vehicle =>
                 ((this.selectedBrands.length <=1 || this.selectedBrands.includes(vehicle.brand))

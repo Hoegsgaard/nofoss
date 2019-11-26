@@ -26,9 +26,9 @@ function App() {
                     <Route exact path={"/create/user"} component={CreateUser}/>
                     <Route exact path={"/profile"} component={Profile}/>
                     <Route exact path={"/"} component={SearchVehicleNew}/>
-                    <Route render={() => <h1>404</h1>}/>
                     </>
                         }
+                    <Route render={() => <h1>404</h1>}/>
                 </Switch>
         </Container>
     );

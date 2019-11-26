@@ -15,7 +15,7 @@ import java.util.Calendar;
 public class JWTHandler{
 
     private static Key key;
-    private static final int TOKEN_EXPIRY = 2880; //2 days
+    private static final int TOKEN_EXPIRY = 60; //1 time
 
     public static String generateJwtToken(User user){
         Calendar expiry = Calendar.getInstance();
