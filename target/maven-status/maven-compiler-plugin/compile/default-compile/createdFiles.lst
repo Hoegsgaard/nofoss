@@ -1,10 +1,10 @@
 AppConfig.class
 MongoService.class
-TestService.class
-rest/LoginData.class
-main.class
 rest/JWTHandler.class
-rest/TokenEndPoint.class
+main.class
 rest/User$UserBuilder.class
+rest/LoginData.class
+TestService.class
+rest/TokenEndPoint.class
 MongoConnector.class
 rest/User.class
