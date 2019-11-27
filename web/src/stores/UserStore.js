@@ -9,6 +9,7 @@ class UserStore{
     constructor(){
         //let nofossToken = localStorage.getItem("NofossToken");
         if (this.token){
+            console.log(this.token)
             this.state = this.loginStates.LOGGED_IN;
         }
         this.startTokenCheck();
@@ -34,11 +35,11 @@ class UserStore{
         const now = new Date();
         let timeOut = (exp - now) - 10000;
         this.timer = setTimeout(()=>{
-                localStorage.clear();
-                this.token = null;
-                this.state=this.loginStates.LOGGED_OUT;
-                toast.warn("Dit login er udløbet. Log ind igen")
-            }, timeOut)
+            localStorage.clear();
+            this.token = null;
+            this.state=this.loginStates.LOGGED_OUT;
+            toast.warn("Dit login er udløbet. Log ind igen")
+        }, timeOut)
     }
 }
 
