@@ -11,7 +11,7 @@ import javax.ws.rs.ext.Provider;
 @Consumes(MediaType.APPLICATION_JSON)
 public class TokenEndPoint {
     @POST
-    public String postLoginDataxx(LoginData login) throws NotAuthorizedException {
+    public String postLoginData(LoginData login) throws NotAuthorizedException {
         if (login != null && "nofoss".equals(login.getUsername()) && "kodeord".equals(login.getPassword())) {
             return JWTHandler.generateJwtToken(new User(login.getUsername(), ""/*new ObjectId("5dc0ad700000000000000000")*/));
         }
