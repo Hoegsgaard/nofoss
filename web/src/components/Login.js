@@ -4,6 +4,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import {CreateUser} from "./CreateUser";
 import Container from "react-bootstrap/Container";
+import {userStore} from "../stores/UserStore";
 
 export const LogIn = () => {
     return (
@@ -23,6 +24,7 @@ export const LogIn = () => {
                                 <FormControl
                                     aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default"
+                                    onChange={(e) => userStore.loginData.username = e.target.value}
                                 />
                             </InputGroup></Col></Row>
 
@@ -30,14 +32,16 @@ export const LogIn = () => {
                             <text>Password</text>
                             <InputGroup className="mb-3">
                                 <FormControl
+                                    type="password"
                                     aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default"
+                                    onChange={(e) => userStore.loginData.password = e.target.value}
                                 />
                             </InputGroup></Col></Row>
 
                         <Row>
                             <Col md={{span: 5, offset: 1}}>
-                                <Button style={{
+                                <Button onClick={login} style={{
                                     width: '100%',
                                     background:'#637724',
                                     borderColor:'#637724'
@@ -60,3 +64,7 @@ export const LogIn = () => {
         </div>
     )
 };
+
+function login() {
+    userStore.doLogin();
+}

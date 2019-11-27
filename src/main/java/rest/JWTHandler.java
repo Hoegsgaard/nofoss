@@ -15,7 +15,7 @@ import java.util.Calendar;
 public class JWTHandler{
 
     private static Key key;
-    private static final int TOKEN_EXPIRY = 2880; //2 days
+    private static final int TOKEN_EXPIRY = 60; //1 time
 
     public static String generateJwtToken(User user){
         Calendar expiry = Calendar.getInstance();
@@ -40,21 +40,16 @@ public class JWTHandler{
         }
         return key;
     }
-    public static User validate(String authentication) throws NotAuthorizedException {
+    public static User validate(String authentication) {
         String[] tokenArray = authentication.split(" ");
         String token = tokenArray[tokenArray.length - 1];
-        try {
-            Claims claims = Jwts.parser()
-                    .setSigningKey(getKey())
-                    .parseClaimsJws(token)
-                    .getBody();
-            ObjectMapper mapper = new ObjectMapper();
-            User user = mapper.convertValue(claims.get("user"), User.class);
-            System.out.println(user);
-            return user;
-        } catch (JwtException e){
-            System.out.println(e.getClass() +":  "+ e.getMessage() );
-            throw new NotAuthorizedException(e.getMessage());
-        }
+        Claims claims = Jwts.parser()
+                .setSigningKey(getKey())
+                .parseClaimsJws(token)
+                .getBody();
+        ObjectMapper mapper = new ObjectMapper();
+        User user = mapper.convertValue(claims.get("user"), User.class);
+        System.out.println(user);
+        return user;
     }
 }
