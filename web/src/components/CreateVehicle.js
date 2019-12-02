@@ -52,7 +52,7 @@ export const CreateVehicle = observer(() => {
                         <Row><Col md={{span: 10, offset: 1}}>
                             <Button onClick={() => vehicleStore.vehicles.push({
                                 brand: vehicleStore.newBrand,
-                                name: vehicleStore.newWeight,
+                                model: vehicleStore.newModel,
                                 price: vehicleStore.newFuel
                             })} style={{
                                 width: '100%',

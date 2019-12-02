@@ -87,13 +87,13 @@ export const SearchVehicleNew = observer(() => {
                     <Row>
                         {brandBoxArray}
                     </Row>
-                    <Typography gutterBottom>Navn</Typography>
+                    <Typography gutterBottom>Model</Typography>
                     <Row>
                         <InputGroup className="mb-3">
                             <FormControl
                                 aria-label="Default"
                                 aria-describedby="inputGroup-sizing-default"
-                                onChange={(e) => vehicleStore.searchName = e.target.value}
+                                onChange={(e) => vehicleStore.searchModel = e.target.value}
                             />
                         </InputGroup>
                     </Row>
