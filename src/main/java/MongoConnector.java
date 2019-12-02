@@ -7,23 +7,28 @@ import org.bson.Document;
 import java.util.ArrayList;
 
 public class MongoConnector {
+    // static variable single_instance of type Singleton
+    private static MongoConnector single_instance = null;
+    // variable of type String
+    public String s;
     private String username = System.getenv("DEVOPSMONGOUSER");
     private String password = System.getenv("DEVOPSMONGOPASS");
-    private String dbName = "test";
+    private MongoClient mongoClient;
 
-    public MongoDatabase getDb() {
-        MongoClient mongoClient = MongoClients.create("mongodb+srv://" + username + ":" + password + "@nofoss-d02td.mongodb.net/test?retryWrites=true&w=majority");
-        return mongoClient.getDatabase(dbName);
+    // private constructor restricted to this class itself
+    private MongoConnector() {
+        mongoClient = MongoClients.create("mongodb+srv://" + username + ":" + password + "@nofoss-d02td.mongodb.net/test?retryWrites=true&w=majority");
     }
 
-    public static void main(String[] args) {
-        MongoDatabase test = new MongoConnector().getDb();
-        System.out.println("Connected to " + test.getName());
-        MongoCollection<Document> brian = test.getCollection("brian");
-        brian.insertOne(new Document("name","Brian").append("hat","ko"));
-        ArrayList<Document> into = brian.find().into(new ArrayList<>());
-        into.forEach(System.out::println);
+    // static method to create instance of Singleton class
+    public static MongoConnector getInstance() {
+        if (single_instance == null)
+            single_instance = new MongoConnector();
 
-        MongoService ms = new MongoService();
+        return single_instance;
+    }
+
+    public MongoClient getDb() {
+        return mongoClient;
     }
 }
