@@ -5,6 +5,10 @@ import React from "react";
 import {vehicleStore} from "../stores/VehicleStore";
 
 export const CreateVehicle = observer(() => {
+    function clean() {
+
+    }
+
     return (
         <div>
             <Container>
@@ -16,6 +20,7 @@ export const CreateVehicle = observer(() => {
                               borderColor: '#d8dee2',
                               borderRadius: "5pt"
                           }}>
+
                     <Container>
                         <Row><Col md={{span: 10, offset: 1}}>
                             <text>Brand</text>
@@ -29,32 +34,72 @@ export const CreateVehicle = observer(() => {
                             </InputGroup></Col></Row>
 
                         <Row><Col md={{span: 10, offset: 1}}>
-                            <text>Weight</text>
+                            <text>Model navn</text>
                             <InputGroup className="mb-3">
                                 <FormControl
                                     aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default"
-                                    value={vehicleStore.newWeight}
-                                    onChange={(e) => vehicleStore.newWeight = e.target.value}
+                                    value={vehicleStore.newModel}
+                                    onChange={(e) => vehicleStore.newModel = e.target.value}
                                 />
                             </InputGroup></Col></Row>
 
                         <Row><Col md={{span: 10, offset: 1}}>
-                            <text>Fuel</text>
+                            <text>Drivmidel</text>
                             <InputGroup className="mb-3">
                                 <FormControl
                                     aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default"
-                                    value={vehicleStore.newFuel} onChange={(e) => vehicleStore.newFuel = e.target.value}
+                                    value={vehicleStore.newFuelType}
+                                    onChange={(e) => vehicleStore.newFuelType = e.target.value}
+
                                 />
                             </InputGroup></Col></Row>
 
                         <Row><Col md={{span: 10, offset: 1}}>
-                            <Button onClick={() => vehicleStore.vehicles.push({
+                            <text>Max vægt</text>
+                            <InputGroup className="mb-3">
+                                <FormControl
+                                    aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    value={vehicleStore.newMaxWeight}
+                                    onChange={(e) => vehicleStore.newMaxWeight = e.target.value}
+                                />
+                            </InputGroup></Col></Row>
+
+                        <Row><Col md={{span: 10, offset: 1}}>
+                            <text>Max rækkevidde</text>
+                            <InputGroup className="mb-3">
+                                <FormControl
+                                    aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    value={vehicleStore.newMaxRange}
+                                    onChange={(e) => vehicleStore.newMaxRange = e.target.value}
+                                />
+                            </InputGroup></Col></Row>
+
+                        <Row><Col md={{span: 10, offset: 1}}>
+                            <text>Price</text>
+                            <InputGroup className="mb-3">
+                                <FormControl
+                                    aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    value={vehicleStore.newPrice}
+                                    onChange={(e) => vehicleStore.newPrice = e.target.value}
+                                />
+                            </InputGroup></Col></Row>
+
+                        <Row><Col md={{span: 10, offset: 1}}>
+                            <Button onClick={() => {clean();
+                                vehicleStore.vehicles.push({
                                 brand: vehicleStore.newBrand,
                                 model: vehicleStore.newModel,
-                                price: vehicleStore.newFuel
-                            })} style={{
+                                fuelType: vehicleStore.newFuelType,
+                                maxWeight: vehicleStore.newMaxWeight,
+                                maxRange: vehicleStore.newMaxRange,
+                                price: vehicleStore.newPrice,
+                                imageLink: 'https://f.nordiskemedier.dk/2gvdpo4v0qz2xyeb.jpg'
+                            })}} style={{
                                 width: '100%',
                                 background: '#637724',
                                 borderColor: '#637724'
