@@ -2,8 +2,31 @@ import {Col, FormControl, InputGroup, Row} from "react-bootstrap";
 import React from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
+import {newUserStore} from "../stores/NewUserStore";
+import {observer} from "mobx-react";
 
-export function CreateUser() {
+export const CreateUser = observer(()=> {
+    function hashPassword(password) {
+        //TODO Hash password
+
+    }
+    function createNewUser(password) {
+        if(identcal()){
+            hashPassword(password)
+        }else {
+            alert("Password er ikke ens")
+        }/*
+        newUserStore.newUser = {
+            firm: newUserStore.newFirm,
+            firstName: newUserStore.newFirstName,
+            newLastName: newUserStore.newLastName,
+            email: newUserStore.newEmail,
+            password: newUserStore.newPasswordOne
+        }*/
+    }
+
+    function identcal() { return newUserStore.newpasswordtow === newUserStore.newPasswordOne ? true : false; }
+
     return (
         <div >
             <Container>
@@ -14,33 +37,37 @@ export function CreateUser() {
                     borderColor: '#d8dee2',
                     borderRadius: "5pt"
                 }}>
-
-
                     <Container>
                         <Row><Col md={{span: 10, offset: 1}}>
-                            <text>Firm</text>
-                            <InputGroup className="mb-3">
+                            <text>Firma</text>
+                            <InputGroup id="test" className="mb-3">
                                 <FormControl
                                     aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default"
+                                    value={newUserStore.newFirm}
+                                    onChange={(e) => newUserStore.newFirm = e.target.value}
                                 />
                             </InputGroup></Col></Row>
 
                         <Row><Col md={{span: 10, offset: 1}}>
-                            <text>First Name</text>
+                            <text>Fornavn</text>
                             <InputGroup className="mb-3">
                                 <FormControl
                                     aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default"
+                                    value={newUserStore.newFirstName}
+                                    onChange={(e)=> newUserStore.newFirstName = e.target.value}
                                 />
                             </InputGroup></Col></Row>
 
                         <Row><Col md={{span: 10, offset: 1}}>
-                            <text>Last Name</text>
+                            <text>Efternavn</text>
                             <InputGroup className="mb-3">
                                 <FormControl
                                     aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default"
+                                    value={newUserStore.newLastName}
+                                onChange={(e)=> newUserStore.newLastName = e.target.value}
                                 />
                             </InputGroup></Col></Row>
 
@@ -50,6 +77,8 @@ export function CreateUser() {
                                 <FormControl
                                     aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default"
+                                    value={newUserStore.newEmail}
+                                    onChange={(e)=> newUserStore.newEmail = e.target.value}
                                 />
                             </InputGroup></Col></Row>
 
@@ -57,8 +86,11 @@ export function CreateUser() {
                             <text>Password</text>
                             <InputGroup className="mb-3">
                                 <FormControl
+                                    type="password"
                                     aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default"
+                                    value={newUserStore.newPasswordOne}
+                                    onChange={(e)=> newUserStore.newPasswordOne = e.target.value}
                                 />
                             </InputGroup></Col></Row>
 
@@ -66,13 +98,18 @@ export function CreateUser() {
                             <text>Password Confirm</text>
                             <InputGroup className="mb-3">
                                 <FormControl
+                                    type="password"
                                     aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default"
+                                    value={newUserStore.newpasswordtow}
+                                    onChange={(e)=> newUserStore.newpasswordtow = e.target.value}
                                 />
                             </InputGroup></Col></Row>
 
                         <Row><Col md={{span: 10, offset: 1}}>
-                            <Button style={{
+                            <Button
+                                onClick={()=>createNewUser(newUserStore.newPasswordOne)}
+                                style={{
                                 width: '100%',
                                 background:'#637724',
                                 borderColor:'#637724'
@@ -84,4 +121,4 @@ export function CreateUser() {
             </Container>
         </div>
     );
-}
+})

@@ -19,8 +19,7 @@ function App() {
                 <Container>
                     <Switch>
                         <Route exact path={"/create/user"} component={CreateUser}/>
-                        <Route exact path={"/"} component={LogIn}/>
-                        <Route render={() => <h1>404 - page not found</h1>}/>
+                        <Route render={() => <LogIn/>}/>
                     </Switch>
                 </Container>
             )
