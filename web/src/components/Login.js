@@ -6,6 +6,7 @@ import {CreateUser} from "./CreateUser";
 import Container from "react-bootstrap/Container";
 import {userStore} from "../stores/UserStore";
 import GoogleLogin from 'react-google-login';
+import GoogleButton from 'react-google-login';
 import {agent} from "../stores/Agent";
 
 export const LogIn = () => {
@@ -66,10 +67,14 @@ export const LogIn = () => {
                                     color:'#637724'
                                 }}>Opret bruger</Button >
                             </Col>
-                            <Col md={{span: 5, offset: 1}}>
+                        </Row>
+                        <Row>
+                            <Col md={{span: 5, offset: 1}}
+                                 style={{
+                                     paddingTop: '5pt'}}>
                                 <GoogleLogin
                                     clientId="535992274215-0i5rm3il5tt76ds4k3a6048pjocvcmob.apps.googleusercontent.com"
-                                    buttonText="Login"
+                                    buttonText="Login med Google"
                                     onSuccess={responseGoogle}
                                     onFailure={responseGoogle}
                                     cookiePolicy={'single_host_origin'
@@ -86,3 +91,6 @@ export const LogIn = () => {
 function login() {
     userStore.doLogin();
 }
+
+/*
+                                  */

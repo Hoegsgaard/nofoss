@@ -25,10 +25,8 @@ class Agent {
                             }
                         }).then(
                             (response) => {
-                                 console.log(response.status)
                                 response.text().then(
                                     (token)=> {
-                                        console.log("Katoffel")
                                         userStore.token = token;
                                         localStorage.setItem("NofossToken", token);
                                         userStore.state = userStore.loginStates.LOGGED_IN;
