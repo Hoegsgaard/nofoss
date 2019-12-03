@@ -1,4 +1,5 @@
 import {userStore} from "./UserStore";
+import {Toast} from "react-bootstrap";
 
 const baseUrl = process.env.NODE_ENV === 'development' ?  "http://localhost:8080/rest/":"rest/"; //Check if dev
 
@@ -13,14 +14,18 @@ class Agent {
             }
         }).then(
             (response)=> {
-                response.text().then(
-                    (token)=>{
-                        userStore.token=token;
-                        localStorage.setItem("NofossToken",token);
-                        userStore.state = userStore.loginStates.LOGGED_IN;
-                        userStore.startTokenCheck();
-                    }
-                )
+                if (response.status === 200) {
+                    response.text().then(
+                        (token) => {
+                            userStore.token = token;
+                            localStorage.setItem("NofossToken", token);
+                            userStore.state = userStore.loginStates.LOGGED_IN;
+                            userStore.startTokenCheck();
+                        }
+                    )
+                } else{
+
+                }
             }
         ).catch(()=> this.state = userStore.loginStates.LOGGED_OUT);
     }
