@@ -4,6 +4,8 @@ import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.ArrayList;
+import java.util.List;
 
 @Path("mongo")
 @Produces(MediaType.APPLICATION_JSON)
@@ -13,11 +15,23 @@ public class MongoService {
     private MongoClient mcl = MongoConnector.getInstance().getDb();
 
     @POST
-    @Path("{collection}")
+    @Path("POST/{collection}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void postRandomObjects(@PathParam("collection") String collection, Document mongoDoc){
+    public void postVehicle(@PathParam("collection") String collection){
         MongoDatabase db = mcl.getDatabase(collection);
         MongoCollection vehicleCollection = db.getCollection("Vehicles");
-        vehicleCollection.insertOne(new Document("brand","Volvo").append("name","123123").append("price","696969").append("fuelType","nutella"));
+        vehicleCollection.insertOne(
+                new Document("brand","Volvo").append("name","123123").append("price","696969").append("fuelType","nutella"));
     }
+
+    @GET
+    @Path("GET/{collection}")
+    public List<Document> getVehicles(@PathParam("collection") String collection){
+        List<Document> docs = new ArrayList<>();
+        MongoDatabase db = mcl.getDatabase(collection);
+        db.getCollection("Vehicles").find().into(docs);
+        System.out.println(docs.toString());
+        return docs;
+    }
+
 }
