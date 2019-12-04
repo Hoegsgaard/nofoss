@@ -9,6 +9,7 @@ class NewUserStore {
     newEmail = "";
     newPasswordOne = "";
     newpasswordtow = "";
+    hashPass ="";
 }
 
 
@@ -18,7 +19,8 @@ decorate(NewUserStore, {
     newLastName: observable,
     newEmail: observable,
     newPasswordOne: observable,
-    newpasswordtow: observable
+    newpasswordtow: observable,
+    hashPass: observable
 });
 
 export const newUserStore = new NewUserStore();

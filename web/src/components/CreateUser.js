@@ -4,25 +4,30 @@ import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import {newUserStore} from "../stores/NewUserStore";
 import {observer} from "mobx-react";
+import Bcrypt from 'bcryptjs';
 
 export const CreateUser = observer(()=> {
     function hashPassword(password) {
-        //TODO Hash password
-
+        const saltRounds = 10;
+        Bcrypt.hash(password, saltRounds, function(err, hash) {
+            console.log(hash);
+            newUserStore.hashPass = hash;
+        });
     }
     function createNewUser(password) {
+        hashPassword(password);
         if(identcal()){
-            hashPassword(password)
+            newUserStore.newUser = {
+                firm: newUserStore.newFirm,
+                firstName: newUserStore.newFirstName,
+                newLastName: newUserStore.newLastName,
+                email: newUserStore.newEmail,
+                password: newUserStore.newPasswordOne//newUserStore.hashPass
+            };
+            console.log(newUserStore.newUser)
         }else {
             alert("Password er ikke ens")
-        }/*
-        newUserStore.newUser = {
-            firm: newUserStore.newFirm,
-            firstName: newUserStore.newFirstName,
-            newLastName: newUserStore.newLastName,
-            email: newUserStore.newEmail,
-            password: newUserStore.newPasswordOne
-        }*/
+        }
     }
 
     function identcal() { return newUserStore.newpasswordtow === newUserStore.newPasswordOne ? true : false; }
