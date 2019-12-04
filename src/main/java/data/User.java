@@ -1,4 +1,4 @@
-package rest;
+package data;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.morphia.annotations.Entity;

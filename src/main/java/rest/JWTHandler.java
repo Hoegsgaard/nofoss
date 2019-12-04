@@ -1,8 +1,8 @@
 package rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import data.User;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.crypto.MacProvider;

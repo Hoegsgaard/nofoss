@@ -1,5 +1,6 @@
 import {userStore} from "./UserStore";
 import {vehicleStore} from "./VehicleStore";
+import {forEach} from "react-bootstrap/cjs/ElementChildren";
 
 const baseUrl = process.env.NODE_ENV === 'development' ?  "http://localhost:8080/rest/":"rest/"; //Check if dev
 
@@ -21,6 +22,7 @@ class Agent {
                             localStorage.setItem("NofossToken", token);
                             userStore.state = userStore.loginStates.LOGGED_IN;
                             userStore.startTokenCheck();
+                            this.doVehicleFetch()
                         }
                     )
                 } else{
@@ -31,16 +33,19 @@ class Agent {
     }
 
     async doVehicleFetch() {
-        await fetch(baseUrl + "mongo/GET/dummyData", {
+        await fetch(baseUrl + "mongo", {
             method: "GET",
             headers: {
                 Authorization: "Bearer " + userStore.token
             }
         }).then(
-            (response) => {
-                vehicleStore.vehicles = response
+            (response) => { response.json()
+                .then((vehicles)=>{
+                    console.log(vehicles)
+                    vehicleStore.vehicles=vehicles
+                });
             }
-        ).catch(() => console.log("couldn't fetch"));
+        ).catch(e => console.log(e));
     }
 }
 
