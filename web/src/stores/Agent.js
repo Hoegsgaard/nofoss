@@ -6,6 +6,31 @@ const baseUrl = process.env.NODE_ENV === 'development' ?  "http://localhost:8080
 
 class Agent {
 
+    createUser(user){
+        fetch(baseUrl + "createUser",{
+            method:"POST",
+            body:JSON.stringify(user),
+            headers:{
+                "Content-Type": "application/json"
+            }
+        }).then(
+            (response)=> {// token
+                if (response.status === 200) {//Hvis/når brugeren er oprettet
+                    response.text().then(
+                        (token) => {
+                            userStore.token = token;
+                            localStorage.setItem("NofossToken", token);
+                            userStore.state = userStore.loginStates.LOGGED_IN;
+                            userStore.startTokenCheck();
+                        }
+                    )
+                } else{
+
+                }
+            }
+        ).catch(() => this.state = userStore.loginStates.LOGGED_OUT);
+    }
+
     doGoogleLogin(token, email){
         fetch(baseUrl + "loginGoogle",{
             method:"POST",
