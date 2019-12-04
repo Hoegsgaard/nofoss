@@ -11,11 +11,9 @@ import javax.ws.rs.core.MediaType;
 public class TokenEndPoint {
     @POST
     public String postLoginData(LoginData login) throws NotAuthorizedException {
-        if (login != null && "nofoss".equals(login.getUsername()) && "kodeord".equals(login.getPassword())) {
-            System.out.println("test " + login);
+        if (login != null && "nofoss".equals(login.getUsername().toLowerCase()) && "kodeord".equals(login.getPassword())) {
             return JWTHandler.generateJwtToken(new User(login.getUsername(), ""/*new ObjectId("5dc0ad700000000000000000")*/));
         }
-        System.out.println("Katoffel");
         throw new NotAuthorizedException("forkert brugernavn/kodeord");
     }
 }
