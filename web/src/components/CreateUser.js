@@ -1,15 +1,48 @@
-import {Col, FormControl, InputGroup, Row} from "react-bootstrap";
-import React from "react";
+import {Col, FormControl, InputGroup, Row, Toast} from "react-bootstrap";
+import React, {useState} from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import {newUserStore} from "../stores/NewUserStore";
 import {observer} from "mobx-react";
 import {agent} from "../stores/Agent";
+import Recaptcha from 'react-recaptcha';
+import {vehicleStore} from "../stores/VehicleStore";
 
 const passwordHash = require('password-hash');
+let isVertified = false;
 export const CreateUser = observer(()=> {
+    const [show1, setShow1] = useState(false);
+    const [show2, setShow2] = useState(false);
+
+    function verifyCallback(response) {
+        if(response){
+            isVertified = true;
+        }
+    }
+
+    function callback () {
+        console.log('Done!!!!');
+    }
+
+    function clean() {
+        newUserStore.newFirm = "";
+        newUserStore.newFirstName = "";
+        newUserStore.newLastNameName = "";
+        newUserStore.newEmail = "";
+        newUserStore.newPasswordOne = "";
+        newUserStore.newpasswordtow ="";
+    }
+
     function createNewUser(password) {
-        const hashPass = passwordHash.generate(password);
+        if(newUserStore.newFirm !== ""
+        && newUserStore.newFirstName !== ""
+        && newUserStore.newLastName !==""
+        && newUserStore.newEmail !== ""
+        && newUserStore.newPasswordOne !== ""
+        && newUserStore.newpasswordtow !== ""
+        && isVertified) {
+
+            const hashPass = passwordHash.generate(password);
             if (identcal()) {
                 newUserStore.newUser = {
                     firm: newUserStore.newFirm,
@@ -18,14 +51,20 @@ export const CreateUser = observer(()=> {
                     email: newUserStore.newEmail,
                     password: hashPass
                 };
-                agent.createUser(newUserStore.newUser)
-
+                clean();
+                //TODO Add newUserStore.newUser to database
+                //agent.createUser(newUserStore.newUser)
+                console.log("Bruger oprettet")
+                //TODO Send user to login page
             } else {
-                alert("Password er ikke ens")
+                setShow1(true)
             }
+        }else{
+            setShow2(true)
+        }
     }
 
-    function identcal() { return newUserStore.newpasswordtow === newUserStore.newPasswordOne ? true : false; }
+    function identcal() { return newUserStore.newpasswordtow === newUserStore.newPasswordOne; }
 
     return (
         <div >
@@ -115,10 +154,43 @@ export const CreateUser = observer(()=> {
                                 borderColor:'#637724'
                             }}>Opret bruger</Button>
                         </Col></Row>
+                        <Row>
+                        <Col md={{span: 10, offset: 1}}>
+                            <Recaptcha
+                                sitekey="6LcaJsYUAAAAAHQ7cbFSBUjwcd3MyuDStYbHF6CX"
+                                render="explicit"
+                                onloadCallback={callback}
+                                verifyCallback={verifyCallback}
+                            />
+                        </Col></Row>
                     </Container>
+                </Col>
+                    <Col md={{span: 3, offset: 0}}>
+                        <Toast onClose={() => setShow1(false)} show={show1} delay={3000} autohide>
+                            <Toast.Header>
+                                <img
+                                    src="holder.js/20x20?text=%20"
+                                    className="rounded mr-2"
+                                    alt=""
+                                />
+                                <strong className="mr-auto">Nofoss</strong>
+                            </Toast.Header>
+                            <Toast.Body>Password er ikke ens</Toast.Body>
+                        </Toast>
 
-                </Col></Row>
+                        <Toast onClose={() => setShow2(false)} show={show2} delay={3000} autohide>
+                            <Toast.Header>
+                                <img
+                                    src="holder.js/20x20?text=%20"
+                                    className="rounded mr-2"
+                                    alt=""
+                                />
+                                <strong className="mr-auto">Nofoss</strong>
+                            </Toast.Header>
+                            <Toast.Body>Alle felter skal være udfyldt</Toast.Body>
+                        </Toast>
+                    </Col> </Row>
             </Container>
         </div>
     );
-})
+});
