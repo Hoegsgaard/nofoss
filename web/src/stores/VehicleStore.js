@@ -38,7 +38,7 @@ class VehicleStore{
     searchMaxRange = 0.0;
 
     get filteredVehicles(){
-        return (
+        if(vehicleStore.vehicles[0]!=null){
             vehicleStore.vehicles.filter(vehicle =>
                 ((this.selectedBrands.length <=1 || this.selectedBrands.includes(vehicle.brand))
                     && (this.selectedFuelTypes.length <=1 || this.selectedFuelTypes.includes(vehicle.fuelType))
@@ -48,6 +48,9 @@ class VehicleStore{
                     && ((this.searchMinRange === 0.0) || Number(vehicle.maxRange) >= Number(this.searchMinRange))
                     && ((this.searchMaxRange === 0.0) || Number(vehicle.maxRange) <= Number(this.searchMaxRange)))
             )
+        }
+        return (
+            vehicleStore.vehicles
         )
     }
 

@@ -102,8 +102,16 @@ class Agent {
         }).then(
             (response) => { response.json()
                 .then((vehicles)=>{
-                    console.log(vehicles)
-                    vehicleStore.vehicles=vehicles
+
+                    vehicles.map(e => vehicleStore.vehicles.push({
+                        brand: e.brand,
+                        model: e.name,
+                        fuelType: e.fuelType,
+                        maxWeight: e.weight,
+                        maxRange: e.range,
+                        price: e.price,
+                        imageLink: e.imageLink
+                    }))
                 });
             }
         ).catch(e => console.log(e));
