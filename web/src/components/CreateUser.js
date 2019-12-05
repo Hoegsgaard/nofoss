@@ -2,7 +2,7 @@ import {Col, FormControl, InputGroup, Row, Toast} from "react-bootstrap";
 import React, {useState} from "react";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import {newUserStore} from "../stores/NewUserStore";
+import {userStore} from "../stores/UserStore";
 import {observer} from "mobx-react";
 import {agent} from "../stores/Agent";
 import Recaptcha from 'react-recaptcha';
@@ -25,37 +25,28 @@ export const CreateUser = observer(()=> {
     }
 
     function clean() {
-        newUserStore.newFirm = "";
-        newUserStore.newFirstName = "";
-        newUserStore.newLastNameName = "";
-        newUserStore.newEmail = "";
-        newUserStore.newPasswordOne = "";
-        newUserStore.newpasswordtow ="";
+        userStore.newFirm = "";
+        userStore.newFirstName = "";
+        userStore.newLastNameName = "";
+        userStore.newEmail = "";
+        userStore.newPasswordOne = "";
+        userStore.newpasswordtow ="";
     }
 
     function createNewUser(password) {
-        if(newUserStore.newFirm !== ""
-        && newUserStore.newFirstName !== ""
-        && newUserStore.newLastName !==""
-        && newUserStore.newEmail !== ""
-        && newUserStore.newPasswordOne !== ""
-        && newUserStore.newpasswordtow !== ""
+        if(userStore.newFirm !== ""
+        && userStore.newFirstName !== ""
+        && userStore.newLastName !==""
+        && userStore.newEmail !== ""
+        && userStore.newPasswordOne !== ""
+        && userStore.newpasswordtow !== ""
         && isVertified) {
 
-            const hashPass = passwordHash.generate(password);
+            //const hashPass = passwordHash.generate(password);
             if (identcal()) {
-                newUserStore.newUser = {
-                    firm: newUserStore.newFirm,
-                    firstName: newUserStore.newFirstName,
-                    lastName: newUserStore.newLastName,
-                    email: newUserStore.newEmail,
-                    password: hashPass
-                };
+                //userStore.newHashPass = hashPass;
+                agent.createUser();
                 clean();
-                //TODO Add newUserStore.newUser to database
-                //agent.createUser(newUserStore.newUser)
-                console.log("Bruger oprettet")
-                //TODO Send user to login page
             } else {
                 setShow1(true)
             }
@@ -64,7 +55,7 @@ export const CreateUser = observer(()=> {
         }
     }
 
-    function identcal() { return newUserStore.newpasswordtow === newUserStore.newPasswordOne; }
+    function identcal() { return userStore.newpasswordtow === userStore.newPasswordOne; }
 
     return (
         <div >
@@ -83,8 +74,8 @@ export const CreateUser = observer(()=> {
                                 <FormControl
                                     aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default"
-                                    value={newUserStore.newFirm}
-                                    onChange={(e) => newUserStore.newFirm = e.target.value}
+                                    value={userStore.newFirm}
+                                    onChange={(e) => userStore.newFirm = e.target.value}
                                 />
                             </InputGroup></Col></Row>
 
@@ -94,8 +85,8 @@ export const CreateUser = observer(()=> {
                                 <FormControl
                                     aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default"
-                                    value={newUserStore.newFirstName}
-                                    onChange={(e)=> newUserStore.newFirstName = e.target.value}
+                                    value={userStore.newFirstName}
+                                    onChange={(e)=> userStore.newFirstName = e.target.value}
                                 />
                             </InputGroup></Col></Row>
 
@@ -105,8 +96,8 @@ export const CreateUser = observer(()=> {
                                 <FormControl
                                     aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default"
-                                    value={newUserStore.newLastName}
-                                onChange={(e)=> newUserStore.newLastName = e.target.value}
+                                    value={userStore.newLastName}
+                                onChange={(e)=> userStore.newLastName = e.target.value}
                                 />
                             </InputGroup></Col></Row>
 
@@ -116,8 +107,8 @@ export const CreateUser = observer(()=> {
                                 <FormControl
                                     aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default"
-                                    value={newUserStore.newEmail}
-                                    onChange={(e)=> newUserStore.newEmail = e.target.value}
+                                    value={userStore.newEmail}
+                                    onChange={(e)=> userStore.newEmail = e.target.value}
                                 />
                             </InputGroup></Col></Row>
 
@@ -128,8 +119,8 @@ export const CreateUser = observer(()=> {
                                     type="password"
                                     aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default"
-                                    value={newUserStore.newPasswordOne}
-                                    onChange={(e)=> newUserStore.newPasswordOne = e.target.value}
+                                    value={userStore.newPasswordOne}
+                                    onChange={(e)=> userStore.newPasswordOne = e.target.value}
                                 />
                             </InputGroup></Col></Row>
 
@@ -140,14 +131,14 @@ export const CreateUser = observer(()=> {
                                     type="password"
                                     aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default"
-                                    value={newUserStore.newpasswordtow}
-                                    onChange={(e)=> newUserStore.newpasswordtow = e.target.value}
+                                    value={userStore.newpasswordtow}
+                                    onChange={(e)=> userStore.newpasswordtow = e.target.value}
                                 />
                             </InputGroup></Col></Row>
 
                         <Row><Col md={{span: 10, offset: 1}}>
                             <Button
-                                onClick={()=>createNewUser(newUserStore.newPasswordOne)}
+                                onClick={()=>createNewUser(userStore.newPasswordOne)}
                                 style={{
                                 width: '100%',
                                 background:'#637724',
@@ -168,11 +159,6 @@ export const CreateUser = observer(()=> {
                     <Col md={{span: 3, offset: 0}}>
                         <Toast onClose={() => setShow1(false)} show={show1} delay={3000} autohide>
                             <Toast.Header>
-                                <img
-                                    src="holder.js/20x20?text=%20"
-                                    className="rounded mr-2"
-                                    alt=""
-                                />
                                 <strong className="mr-auto">Nofoss</strong>
                             </Toast.Header>
                             <Toast.Body>Password er ikke ens</Toast.Body>
@@ -180,11 +166,6 @@ export const CreateUser = observer(()=> {
 
                         <Toast onClose={() => setShow2(false)} show={show2} delay={3000} autohide>
                             <Toast.Header>
-                                <img
-                                    src="holder.js/20x20?text=%20"
-                                    className="rounded mr-2"
-                                    alt=""
-                                />
                                 <strong className="mr-auto">Nofoss</strong>
                             </Toast.Header>
                             <Toast.Body>Alle felter skal være udfyldt</Toast.Body>

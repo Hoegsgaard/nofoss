@@ -66,30 +66,20 @@ class Agent {
         ).catch(() => userStore.state = userStore.loginStates.LOGGED_OUT);
     }
 
-    async createUser(user) {
-        fetch(baseUrl + "createUser", {
+    async createUser() {
+        fetch(baseUrl + "user", {
             method: "POST",
-            body: JSON.stringify(user),
             headers: {
                 "Content-Type": "application/json",
-                Authorization: "Bearer " + userStore.token
-            }
-        }).then(
-            (response) => {// token
-                if (response.status === 200) {//Hvis/når brugeren er oprettet
-                    response.text().then(
-                        (token) => {
-                            userStore.token = token;
-                            localStorage.setItem("NofossToken", token);
-                            userStore.state = userStore.loginStates.LOGGED_IN;
-                            userStore.startTokenCheck();
-                        }
-                    )
-                } else {
-
-                }
-            }
-        ).catch(() => this.state = userStore.loginStates.LOGGED_OUT);
+            },
+            body: JSON.stringify({
+                nameFirst: userStore.newFirstName,
+                nameLast: userStore.newLastName,
+                firm: userStore.newFirm,
+                email: userStore.newEmail,
+                password/*måske dumt?*/ : userStore.newPasswordOne
+            })
+        }).catch(() => this.state = userStore.loginStates.LOGGED_OUT);
     }
 
     async doVehicleFetch() {

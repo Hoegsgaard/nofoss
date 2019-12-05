@@ -7,9 +7,11 @@ import jdk.nashorn.internal.parser.JSONParser;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
+import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class MongoDAO implements VehiclesDAO,UserDAO{
 
@@ -24,7 +26,12 @@ public class MongoDAO implements VehiclesDAO,UserDAO{
 
     @Override
     public void addUser(String user) {
-
+        MongoCollection<Document> docs = mdb.getCollection("Users");
+        Document document = new Document(Document.parse(user));
+        String hashedPassword = BCrypt.hashpw(document.getString("password"), BCrypt.gensalt());
+        document.remove("password");
+        document.append("hashPW", hashedPassword);
+        docs.insertOne(document);
     }
 
     @Override

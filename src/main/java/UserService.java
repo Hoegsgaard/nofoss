@@ -1,3 +1,4 @@
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoDatabase;
@@ -16,9 +17,8 @@ public class UserService {
     private MongoDAO mongoDAO = new MongoDAO();
 
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void postRandomObjects(){
-
+    public void createUser(String newUser) {
+        mongoDAO.addUser(newUser);
     }
 
     @GET

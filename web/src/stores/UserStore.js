@@ -4,6 +4,8 @@ import {toast} from 'react-toastify';
 
 
 class UserStore{
+    currentUser;
+
     loginData={username:"",password:""};
     loginStates = {LOGGING_IN:"loading", LOGGED_OUT:"logout", LOGGED_IN:"LoggedIn"};
     token = window.localStorage.getItem("NofossToken");
@@ -15,6 +17,14 @@ class UserStore{
         }
         this.startTokenCheck();
     }
+
+    newFirm = "";
+    newFirstName = "";
+    newLastName = "";
+    newEmail = "";
+    newPasswordOne = "";
+    newpasswordtow = "";
+    newHashPass ="";
 
     adminNavBar = [
         {href:"#/search",name:"Søg køretøj"},
@@ -45,7 +55,14 @@ class UserStore{
 
 decorate(UserStore,{
     state:observable,
-    loginData: observable
+    loginData: observable,
+    newFirm: observable,
+    newFirstName: observable,
+    newLastName: observable,
+    newEmail: observable,
+    newPasswordOne: observable,
+    newpasswordtow: observable,
+    hashPass: observable
 });
 
 export const userStore = new UserStore();
