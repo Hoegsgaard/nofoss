@@ -4,6 +4,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import {vehicleStore} from "../stores/VehicleStore";
 import {CarCard} from "./CarCard";
+import {CarCardAdmin} from "./CarCardAdmin";
 import {FormControl, InputGroup} from "react-bootstrap";
 import Typography from "@material-ui/core/Typography/Typography";
 import Checkbox from "@material-ui/core/Checkbox/Checkbox";
@@ -173,7 +174,7 @@ export const SearchVehicleNew = observer(() => {
                 <Col xs={8} style={{overflow: 'scroll'}}>
                         {vehicleStore.filteredVehicles.map(vehicle =>
                             /*Here should be a filter to only insert the cards passing the filter into the cardArray*/
-                            <CarCard Car={vehicle}/>)}
+                            <CarCardAdmin Car={vehicle}/>)}
                 </Col>
             </Row>
         </Container>

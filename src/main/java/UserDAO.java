@@ -9,10 +9,10 @@ public interface UserDAO {
     String getUser();
 
     //POST
-    void addUser(User user);
+    void addUser(String user);
 
     //DELETE
-    void deleteUser(User user);
+    void deleteUser(String user);
 
 
 

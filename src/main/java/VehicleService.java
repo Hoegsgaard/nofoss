@@ -21,14 +21,20 @@ public class VehicleService {
     private MongoDAO mongoDAO = new MongoDAO();
 
     @POST
-    public void postVehicle(){
-        //mongoDAO.addVehicle(new Vehicle());
+    public void postVehicle(String newVehicle){
+        mongoDAO.addVehicle(newVehicle);
     }
 
     @GET
     public String getVehicles() throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         return objectMapper.writeValueAsString(mongoDAO.getVehicles());
+    }
+
+    @DELETE
+    @Path("{vehicleIDHex}")
+    public void deleteVehicle(@PathParam("vehicleIDHex") String vehicleIDHex) {
+        mongoDAO.deleteVehicle(vehicleIDHex);
     }
 
 }

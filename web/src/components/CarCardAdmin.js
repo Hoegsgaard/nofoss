@@ -1,9 +1,15 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
 import {Col, Row} from "react-bootstrap";
+import {vehicleStore} from "../stores/VehicleStore";
 
-export function CarCard({Car}) {
+export function CarCardAdmin({Car}) {
     const {model,brand,price,fuelType,maxWeight,maxRange,imageLink,_id} = Car
+    const id = "testID" //CHANGE THIS
+    function deleteCar(){
+        vehicleStore.deleteVehicle(_id)
+    }
+
     return (
         <Card>
             <Row>
@@ -22,6 +28,8 @@ export function CarCard({Car}) {
                         Total rækkevidde: {maxRange} km.
                         <br/>
                         Brændstof: {fuelType}.
+                        <br/>
+                        <button type="button" onClick={deleteCar} className="btn btn-danger">SLET KØRETØJ</button>
                     </Card.Body>
                 </Col>
             </Row>

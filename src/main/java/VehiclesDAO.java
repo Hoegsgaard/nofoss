@@ -8,10 +8,10 @@ public interface VehiclesDAO {
     List<Vehicle> getVehicles();
 
     //POST
-    void addVehicle(Vehicle vehicle);
+    void addVehicle(String vehicle);
 
     //DELETE
-    void deleteVehicle(Vehicle vehicle);
+    void deleteVehicle(String vehicleID);
 
 
 

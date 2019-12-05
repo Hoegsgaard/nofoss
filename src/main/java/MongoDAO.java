@@ -1,8 +1,12 @@
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
 import data.User;
 import data.Vehicle;
+import jdk.nashorn.internal.parser.JSONParser;
 import org.bson.Document;
+import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +23,12 @@ public class MongoDAO implements VehiclesDAO,UserDAO{
     }
 
     @Override
-    public void addUser(User user) {
+    public void addUser(String user) {
 
     }
 
     @Override
-    public void deleteUser(User user) {
+    public void deleteUser(String user) {
 
     }
 
@@ -35,6 +39,7 @@ public class MongoDAO implements VehiclesDAO,UserDAO{
 
         for(Document d : docs.find()){
             vehicles.add(new Vehicle(
+                    d.getObjectId("_id").toHexString(),
                     d.getString("brand"),
                     d.getString("name"),
                     d.getString("price"),
@@ -49,12 +54,16 @@ public class MongoDAO implements VehiclesDAO,UserDAO{
     }
 
     @Override
-    public void addVehicle(Vehicle vehicle) {
-
+    public void addVehicle(String vehicle){
+        MongoCollection<Document> docs = mdb.getCollection("Vehicles");
+        Document document = new Document(Document.parse(vehicle));
+        docs.insertOne(document);
     }
 
     @Override
-    public void deleteVehicle(Vehicle vehicle) {
-
+    public void deleteVehicle(String vehicleIDHex) {
+        MongoCollection<Document> docs = mdb.getCollection("Vehicles");
+        Bson filter = Filters.eq("_id", new ObjectId(vehicleIDHex));
+        docs.deleteOne(filter);
     }
 }

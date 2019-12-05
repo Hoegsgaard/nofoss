@@ -1,4 +1,5 @@
 import {computed, decorate, observable} from "mobx";
+import {agent} from "../stores/Agent";
 
 
 const baseUrl = "http://localhost:8080/rest/"
@@ -8,18 +9,6 @@ class VehicleStore{
     vehicles = [];
     brands = ["Volvo", "Renault", "Iveco","Scania"];
     fuelType = ["Gas", "El"];
-
-        /*vehicles = [
-        {brand: 'Volvo', model: '5-53x', price: '550000', maxWeight: '40000', maxRange: '1000', fuelType: 'Gas', imageLink: 'https://f.nordiskemedier.dk/2gvdpo4v0qz2xyeb.jpg'},
-        {brand: 'Volvo', model: '6-63x', price: '500000', maxWeight: '27000', maxRange: '2000', fuelType: 'El', imageLink: 'https://f.nordiskemedier.dk/2gvdpo4v0qz2xyeb.jpg'},
-        {brand: 'Scania', model: '123', price: '450000', maxWeight: '40000', maxRange: '1000', fuelType: 'Gas', imageLink: 'https://f.nordiskemedier.dk/2gvdpo4v0qz2xyeb.jpg'},
-        {brand: 'Scania', model: '321', price: '350000', maxWeight: '27000', maxRange: '2000', fuelType: 'Gas', imageLink: 'https://f.nordiskemedier.dk/2gvdpo4v0qz2xyeb.jpg'},
-        {brand: 'Iveco', model: 'abc', price: '250000', maxWeight: '3500', maxRange: '750', fuelType: 'Gas', imageLink: 'https://f.nordiskemedier.dk/2gvdpo4v0qz2xyeb.jpg'},
-        {brand: 'Iveco', model: 'def', price: '300000', maxWeight: '7000', maxRange: '1400', fuelType: 'Gas', imageLink: 'https://f.nordiskemedier.dk/2gvdpo4v0qz2xyeb.jpg'},
-        {brand: 'Iveco', model: 'ghi', price: '400000', maxWeight: '40000', maxRange: '2000', fuelType: 'Gas', imageLink: 'https://f.nordiskemedier.dk/2gvdpo4v0qz2xyeb.jpg'},
-        {brand: 'Renault', model: 'lille', price: '300000', maxWeight: '2500', maxRange: '1000', fuelType: 'El', imageLink: 'https://f.nordiskemedier.dk/2gvdpo4v0qz2xyeb.jpg'},
-        {brand: 'Renault', model: 'Stor', price: '350000', maxWeight: '4000', maxRange: '1500', fuelType: 'El', imageLink: 'https://f.nordiskemedier.dk/2gvdpo4v0qz2xyeb.jpg'},
-    ];*/
 
     newBrand = "";
     newModel = "";
@@ -54,7 +43,13 @@ class VehicleStore{
         )
     }
 
+    deleteVehicle(vehicleID){
+        agent.deleteVehicle(vehicleID)
+    }
+
 }
+
+
 
 decorate(VehicleStore,{
     vehicles: observable,

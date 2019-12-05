@@ -12,7 +12,8 @@ import org.bson.types.ObjectId;
 @Entity
 public class Vehicle {
 
-    public Vehicle(String brand, String name, String price, String weight, String range, String fuelType, String imageLink){
+    public Vehicle(String _id, String brand, String name, String price, String weight, String range, String fuelType, String imageLink){
+        this._id=_id;
         this.brand=brand;
         this.name=name;
         this.price=price;
@@ -22,6 +23,7 @@ public class Vehicle {
         this.imageLink=imageLink;
     };
 
+    private String _id;
     private String brand;
     private String name;
     private String price;
@@ -29,15 +31,5 @@ public class Vehicle {
     private String range;
     private String fuelType;
     private String imageLink;
-
-    /*@Id @JsonIgnore //
-    private ObjectId _id;
-
-    public String getId(){ //Konverterer ObjectID'et til en pæn string
-        return _id.toHexString();
-    }
-    public void setID(String id){ //Konverterer en HexString til ObjectID
-        _id = new ObjectId(id);
-    }*/
 
 }
