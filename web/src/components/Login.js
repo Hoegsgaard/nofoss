@@ -17,9 +17,10 @@ export const LogIn = observer( () => {
 
     function login() {
         if(userStore.loginData.username !== ""
-        && userStore.loginData.password !=="") {
+        && userStore.loginData.password !== "") {
             userStore.doLogin();
-            if (userStore.state !== userStore.loginStates.LOGGED_IN) {
+            if (userStore.state !== userStore.loginStates.LOGGED_IN && userStore.state !== userStore.loginStates.LOGGING_IN){
+                console.log((userStore.state));
                 userStore.loginData.password = "";
                 setShow1(true);
             }
@@ -104,11 +105,6 @@ export const LogIn = observer( () => {
                 </Col>
                     <Col><Toast onClose={() => setShow1(false)} show={show1} delay={3000} autohide>
                         <Toast.Header>
-                            <img
-                                src="holder.js/20x20?text=%20"
-                                className="rounded mr-2"
-                                alt=""
-                            />
                             <strong className="mr-auto">Nofoss</strong>
                         </Toast.Header>
                         <Toast.Body>Email og password stemmer ikke over ens</Toast.Body>
@@ -116,11 +112,6 @@ export const LogIn = observer( () => {
 
                     <Toast onClose={() => setShow2(false)} show={show2} delay={3000} autohide>
                         <Toast.Header>
-                            <img
-                                src="holder.js/20x20?text=%20"
-                                className="rounded mr-2"
-                                alt=""
-                            />
                             <strong className="mr-auto">Nofoss</strong>
                         </Toast.Header>
                         <Toast.Body>Alle felter skal være udfyldt</Toast.Body>

@@ -5,6 +5,7 @@ import com.mongodb.client.MongoDatabase;
 import exception.NoImplementationException;
 import org.bson.Document;
 import rest.JWTHandler;
+import rest.LoginData;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -30,4 +31,12 @@ public class UserService {
         System.out.println("endpoint hit");
         throw new NoImplementationException("GetUser not implemented, yet");
     }
+
+    @Path("login")
+    @POST
+    public String loginUser(String userData){
+
+        return mongoDAO.loginUser(userData);
+    }
+
 }

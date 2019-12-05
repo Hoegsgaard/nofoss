@@ -8,7 +8,7 @@ import {agent} from "../stores/Agent";
 import Recaptcha from 'react-recaptcha';
 import {vehicleStore} from "../stores/VehicleStore";
 
-const passwordHash = require('password-hash');
+//const passwordHash = require('password-hash');
 let isVertified = false;
 export const CreateUser = observer(()=> {
     const [show1, setShow1] = useState(false);
@@ -21,7 +21,7 @@ export const CreateUser = observer(()=> {
     }
 
     function callback () {
-        console.log('Done!!!!');
+        console.log('Done');
     }
 
     function clean() {
