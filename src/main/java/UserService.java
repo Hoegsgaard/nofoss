@@ -4,6 +4,7 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
 import rest.JWTHandler;
+import rest.LoginData;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -25,6 +26,13 @@ public class UserService {
     public List<String> getVehicles(){
         return null;
 
+    }
+
+    @Path("login")
+    @POST
+    public String loginUser(String userData){
+
+        return mongoDAO.loginUser(userData);
     }
 
 }

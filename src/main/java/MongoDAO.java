@@ -8,7 +8,10 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import org.mindrot.jbcrypt.BCrypt;
+import rest.JWTHandler;
+import rest.LoginData;
 
+import javax.ws.rs.NotAuthorizedException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +40,20 @@ public class MongoDAO implements VehiclesDAO,UserDAO{
     @Override
     public void deleteUser(String user) {
 
+    }
+
+    @Override
+    public String loginUser(String loginString){
+        MongoCollection<Document> docs = mdb.getCollection("Users");
+        Document document = new Document(Document.parse(loginString));
+        Bson filter = Filters.eq("email", document.get("username"));
+        Document dbUser = docs.find(filter).first();
+        if(dbUser != null){
+            if(BCrypt.checkpw(document.get("password").toString(), dbUser.getString("hashPW"))){
+                return JWTHandler.generateJwtToken(new User(document.get("username").toString(), ""));
+            }
+        }
+        throw new NotAuthorizedException("forkert brugernavn/kodeord");
     }
 
     @Override

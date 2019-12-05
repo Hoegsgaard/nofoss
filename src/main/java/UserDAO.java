@@ -14,6 +14,8 @@ public interface UserDAO {
     //DELETE
     void deleteUser(String user);
 
+    String loginUser(String user);
+
 
 
 

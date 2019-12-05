@@ -41,8 +41,9 @@ class Agent {
         ).catch(() => userStore.state = userStore.loginStates.LOGGED_OUT);
     }
 
-     async doLogin(loginData) {
-        await fetch(baseUrl + "login", {
+     doLogin(loginData) {
+        userStore.state = userStore.loginStates.LOGGING_IN;
+        fetch(baseUrl + "user/login", {
             method: "POST",
             body: JSON.stringify(loginData),
             headers: {
