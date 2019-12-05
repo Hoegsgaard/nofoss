@@ -3,6 +3,7 @@ import {Col, Container, FormControl, InputGroup, Row, Toast} from "react-bootstr
 import Button from "react-bootstrap/Button";
 import React, {useState} from "react";
 import {vehicleStore} from "../stores/VehicleStore";
+import {agent} from "../stores/Agent";
 
 export const CreateVehicle = observer(() => {
     const [show1, setShow1] = useState(false);
@@ -15,6 +16,7 @@ export const CreateVehicle = observer(() => {
         vehicleStore.newMaxWeight = "";
         vehicleStore.newMaxRange = "";
         vehicleStore.newPrice ="";
+        vehicleStore.newImageLink="";
     }
 
     function opretKøretøj() {
@@ -23,7 +25,8 @@ export const CreateVehicle = observer(() => {
             && vehicleStore.newFuelType !== ""
             && vehicleStore.newMaxWeight !== ""
             && vehicleStore.newMaxRange !== ""
-            && vehicleStore.newPrice !=="") {
+            && vehicleStore.newPrice !==""
+            && vehicleStore.newImageLink !=="") {
 
             vehicleStore.vehicles.push({
                 brand: vehicleStore.newBrand,
@@ -32,8 +35,9 @@ export const CreateVehicle = observer(() => {
                 maxWeight: vehicleStore.newMaxWeight,
                 maxRange: vehicleStore.newMaxRange,
                 price: vehicleStore.newPrice,
-                imageLink: 'https://f.nordiskemedier.dk/2gvdpo4v0qz2xyeb.jpg'
+                imageLink: vehicleStore.newImageLink
             });
+            agent.createVehicle()
             clean();
             setShow1(true)
         }else {
@@ -55,7 +59,7 @@ export const CreateVehicle = observer(() => {
 
                     <Container>
                         <Row><Col md={{span: 10, offset: 1}}>
-                            <text>Brand</text>
+                            <text>Mærke</text>
                             <InputGroup className="mb-3">
                                 <FormControl
                                     aria-label="Default"
@@ -66,7 +70,7 @@ export const CreateVehicle = observer(() => {
                             </InputGroup></Col></Row>
 
                         <Row><Col md={{span: 10, offset: 1}}>
-                            <text>Model navn</text>
+                            <text>Model navn / nr.</text>
                             <InputGroup className="mb-3">
                                 <FormControl
                                     aria-label="Default"
@@ -77,7 +81,7 @@ export const CreateVehicle = observer(() => {
                             </InputGroup></Col></Row>
 
                         <Row><Col md={{span: 10, offset: 1}}>
-                            <text>Drivmidel</text>
+                            <text>Drivmiddel</text>
                             <InputGroup className="mb-3">
                                 <FormControl
                                     aria-label="Default"
@@ -111,13 +115,24 @@ export const CreateVehicle = observer(() => {
                             </InputGroup></Col></Row>
 
                         <Row><Col md={{span: 10, offset: 1}}>
-                            <text>Price</text>
+                            <text>Pris</text>
                             <InputGroup className="mb-3">
                                 <FormControl
                                     aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default"
                                     value={vehicleStore.newPrice}
                                     onChange={(e) => vehicleStore.newPrice = e.target.value}
+                                />
+                            </InputGroup></Col></Row>
+
+                        <Row><Col md={{span: 10, offset: 1}}>
+                            <text>Link til billede</text>
+                            <InputGroup className="mb-3">
+                                <FormControl
+                                    aria-label="Default"
+                                    aria-describedby="inputGroup-sizing-default"
+                                    value={vehicleStore.newImageLink}
+                                    onChange={(e) => vehicleStore.newImageLink = e.target.value}
                                 />
                             </InputGroup></Col></Row>
 
@@ -135,11 +150,6 @@ export const CreateVehicle = observer(() => {
                     <Col md={{span: 3, offset: 0}}>
                         <Toast onClose={() => setShow1(false)} show={show1} delay={3000} autohide>
                             <Toast.Header>
-                                <img
-                                    src="holder.js/20x20?text=%20"
-                                    className="rounded mr-2"
-                                    alt=""
-                                />
                                 <strong className="mr-auto">Nofoss</strong>
                             </Toast.Header>
                             <Toast.Body>Køretøj oprettet</Toast.Body>
@@ -147,11 +157,6 @@ export const CreateVehicle = observer(() => {
 
                         <Toast onClose={() => setShow2(false)} show={show2} delay={3000} autohide>
                             <Toast.Header>
-                                <img
-                                    src="holder.js/20x20?text=%20"
-                                    className="rounded mr-2"
-                                    alt=""
-                                />
                                 <strong className="mr-auto">Nofoss</strong>
                             </Toast.Header>
                             <Toast.Body>Alle felter skal være udfyldt</Toast.Body>
@@ -161,7 +166,5 @@ export const CreateVehicle = observer(() => {
                 </Row>
             </Container>
         </div>
-
-
     );
 })

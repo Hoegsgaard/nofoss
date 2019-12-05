@@ -1,10 +1,12 @@
 import {computed, decorate, observable} from "mobx";
 import {agent} from "../stores/Agent";
 
-
-const baseUrl = "http://localhost:8080/rest/"
-
 class VehicleStore{
+
+    constructor() {
+        agent.doVehicleFetch()
+    }
+
     response;
     vehicles = [];
     brands = ["Volvo", "Renault", "Iveco","Scania"];
@@ -27,8 +29,7 @@ class VehicleStore{
     searchMaxRange = 0.0;
 
     get filteredVehicles(){
-        if(vehicleStore.vehicles[0]!=null){
-            vehicleStore.vehicles.filter(vehicle =>
+        return vehicleStore.vehicles.filter(vehicle =>
                 ((this.selectedBrands.length <=1 || this.selectedBrands.includes(vehicle.brand))
                     && (this.selectedFuelTypes.length <=1 || this.selectedFuelTypes.includes(vehicle.fuelType))
                     && vehicle.model.toLowerCase().includes(this.searchModel.toLowerCase())
@@ -37,19 +38,14 @@ class VehicleStore{
                     && ((this.searchMinRange === 0.0) || Number(vehicle.maxRange) >= Number(this.searchMinRange))
                     && ((this.searchMaxRange === 0.0) || Number(vehicle.maxRange) <= Number(this.searchMaxRange)))
             )
-        }
-        return (
-            vehicleStore.vehicles
-        )
     }
 
     deleteVehicle(vehicleID){
+        this.vehicles=this.vehicles.filter(vehicle => vehicle._id!==vehicleID)
         agent.deleteVehicle(vehicleID)
     }
 
 }
-
-
 
 decorate(VehicleStore,{
     vehicles: observable,

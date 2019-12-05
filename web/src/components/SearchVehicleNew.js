@@ -13,8 +13,6 @@ import {observer} from "mobx-react";
 
 export const SearchVehicleNew = observer(() => {
 
-    const [value, setValue] = React.useState([0, 100]);
-
     /*Contains checkbox boolean setting TODO: implement these with brandArray*/
     const [state, setState] = React.useState({
         Volvo: true,
@@ -24,10 +22,6 @@ export const SearchVehicleNew = observer(() => {
 
     const checkboxChange = name => event => {
         setState({...state, [name]: event.target.checked});
-    };
-
-    const sliderChange = (event, newValue) => {
-        setValue(newValue);
     };
 
     const brandBoxArray = vehicleStore.brands.map((brand, key) =>
@@ -40,7 +34,6 @@ export const SearchVehicleNew = observer(() => {
                                   onChange={(e) => {
                                       if (e.target.checked) {
                                           vehicleStore.selectedBrands.push(brand)
-                                          console.log(vehicleStore.selectedBrands)
                                       } else {
                                           var index = vehicleStore.selectedBrands.indexOf(e.target.value);
                                           if (index > -1) {
