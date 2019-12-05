@@ -91,6 +91,7 @@ class Agent {
             }
         }).then(
             (response) => {
+                if(response.status===200){
                 response.json()
                     .then((vehicles) => {
                         vehicles.map(vehicle => vehicleStore.vehicles.push({
@@ -104,6 +105,9 @@ class Agent {
                             imageLink: vehicle.imageLink
                         }))
                     });
+            }else if(response.status===404){
+                    
+                }
             }
         ).catch(e => console.log(e));
     }
@@ -135,5 +139,7 @@ class Agent {
         })
     }
 }
+
+
 
 export const agent = new Agent();
