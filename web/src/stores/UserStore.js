@@ -4,6 +4,7 @@ import {toast} from 'react-toastify';
 
 
 class UserStore{
+    loginData={username:"",password:""};
     loginStates = {LOGGING_IN:"loading", LOGGED_OUT:"logout", LOGGED_IN:"LoggedIn"};
     token = window.localStorage.getItem("NofossToken");
     constructor(){
@@ -20,7 +21,6 @@ class UserStore{
         {href:"#/create/vehicle",name:"Opret køretøj"},
         {href:"#/profile",name:"Profil"}];
 
-    loginData={username:"",password:""};
     state = this.loginStates.LOGGED_OUT;
 
     doLogin(){
@@ -38,13 +38,14 @@ class UserStore{
             localStorage.clear();
             this.token = null;
             this.state=this.loginStates.LOGGED_OUT;
-            toast.warn("Dit login er udløbet. Log ind igen")
+            toast.warn("Dit login er udløbet. Log ind igen");
         }, timeOut)
     }
 }
 
 decorate(UserStore,{
-    state:observable
-})
+    state:observable,
+    loginData: observable
+});
 
 export const userStore = new UserStore();

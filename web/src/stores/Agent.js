@@ -1,6 +1,5 @@
 import {userStore} from "./UserStore";
 import {vehicleStore} from "./VehicleStore";
-import {forEach} from "react-bootstrap/cjs/ElementChildren";
 
 const baseUrl = process.env.NODE_ENV === 'development' ? "http://localhost:8080/rest/" : "rest/"; //Check if dev
 
@@ -29,7 +28,7 @@ class Agent {
 
                 }
             }
-        ).catch(() => this.state = userStore.loginStates.LOGGED_OUT);
+        ).catch(() => userStore.state = userStore.loginStates.LOGGED_OUT);
     }
 
     doGoogleLogin(token, email) {
@@ -64,11 +63,11 @@ class Agent {
                     }
                 })
             }
-        ).catch(() => this.state = userStore.loginStates.LOGGED_OUT);
+        ).catch(() => userStore.state = userStore.loginStates.LOGGED_OUT);
     }
 
-    doLogin(loginData) {
-        fetch(baseUrl + "login", {
+     async doLogin(loginData) {
+        await fetch(baseUrl + "login", {
             method: "POST",
             body: JSON.stringify(loginData),
             headers: {
@@ -82,18 +81,19 @@ class Agent {
                             userStore.token = token;
                             localStorage.setItem("NofossToken", token);
                             userStore.state = userStore.loginStates.LOGGED_IN;
+                            console.log("Fra Agent: " + userStore.state)
                             userStore.startTokenCheck();
 
                             //TODO: Place these in correct .js files
-                            this.createVehicle()
+                            //this.createVehicle()
                             this.doVehicleFetch()
                         }
                     )
-                } else {
+                }else if(response.status === 401){
 
                 }
             }
-        ).catch(() => this.state = userStore.loginStates.LOGGED_OUT);
+        ).catch(() => userStore.state = userStore.loginStates.LOGGED_OUT);
     }
 
     async doVehicleFetch() {
