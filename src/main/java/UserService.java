@@ -2,11 +2,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoDatabase;
+import exception.NoImplementationException;
 import org.bson.Document;
 import rest.JWTHandler;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
 import java.util.List;
 
 @Path("user")
@@ -22,9 +26,8 @@ public class UserService {
     }
 
     @GET
-    public List<String> getVehicles(){
-        return null;
-
+    public String getUser() throws NoImplementationException{
+        System.out.println("endpoint hit");
+        throw new NoImplementationException("GetUser not implemented, yet");
     }
-
 }
