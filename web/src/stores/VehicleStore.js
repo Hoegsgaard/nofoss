@@ -23,20 +23,20 @@ class VehicleStore{
     selectedBrands = [""];
     selectedFuelTypes = [""];
     searchModel = "";
-    searchMinWeight = 0.0;
-    searchMaxWeight = 0.0;
-    searchMinRange = 0.0;
-    searchMaxRange = 0.0;
+    searchMinWeight = "";
+    searchMaxWeight = "";
+    searchMinRange = "";
+    searchMaxRange = "";
 
     get filteredVehicles(){
         return vehicleStore.vehicles.filter(vehicle =>
                 ((this.selectedBrands.length <=1 || this.selectedBrands.includes(vehicle.brand))
                     && (this.selectedFuelTypes.length <=1 || this.selectedFuelTypes.includes(vehicle.fuelType))
                     && vehicle.model.toLowerCase().includes(this.searchModel.toLowerCase())
-                    && ((this.searchMinWeight === 0.0) || Number(vehicle.maxWeight) >= Number(this.searchMinWeight))
-                    && ((this.searchMaxWeight === 0.0) || Number(vehicle.maxWeight) <= Number(this.searchMaxWeight))
-                    && ((this.searchMinRange === 0.0) || Number(vehicle.maxRange) >= Number(this.searchMinRange))
-                    && ((this.searchMaxRange === 0.0) || Number(vehicle.maxRange) <= Number(this.searchMaxRange)))
+                    && ((this.searchMinWeight === "") || Number(vehicle.maxWeight) >= Number(this.searchMinWeight))
+                    && ((this.searchMaxWeight === "") || Number(vehicle.maxWeight) <= Number(this.searchMaxWeight))
+                    && ((this.searchMinRange === "") || Number(vehicle.maxRange) >= Number(this.searchMinRange))
+                    && ((this.searchMaxRange === "") || Number(vehicle.maxRange) <= Number(this.searchMaxRange)))
             )
     }
 
