@@ -7,7 +7,7 @@ import {CreateVehicle} from "./components/CreateVehicle";
 import {CreateUser} from "./components/CreateUser";
 import {CustomNavBar} from "./components/CustomNavBar";
 import {LogIn} from "./components/Login";
-import {SearchVehicleNew} from "./components/SearchVehicleNew";
+import {SearchVehicle} from "./components/SearchVehicle";
 import Container from "react-bootstrap/Container";
 import {Profile} from "./components/Profile";
 import {userStore} from "./stores/UserStore";
@@ -29,10 +29,10 @@ function App() {
                 <CustomNavBar/>
                 <Switch>
                         <Route exact path={"/login"} component={LogIn}/>
-                        <Route exact path={"/search"} component={SearchVehicleNew}/>
+                        <Route exact path={"/search"} component={SearchVehicle}/>
                         <Route exact path={"/create/vehicle"} component={CreateVehicle}/>
                         <Route exact path={"/profile"} component={Profile}/>
-                        <Route exact path={"/"} component={SearchVehicleNew}/>
+                        <Route exact path={"/"} component={SearchVehicle}/>
                         <Route render={() => <h1>404 - page not found</h1>}/>
                 </Switch>
             </Container>
