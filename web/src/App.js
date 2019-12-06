@@ -28,7 +28,6 @@ function App() {
             <Container>
                 <CustomNavBar/>
                 <Switch>
-                        <Route exact path={"/login"} component={LogIn}/>
                         <Route exact path={"/search"} component={SearchVehicle}/>
                         <Route exact path={"/create/vehicle"} component={CreateVehicle}/>
                         <Route exact path={"/profile"} component={Profile}/>

@@ -12,7 +12,6 @@ class UserStore{
     constructor(){
         //let nofossToken = localStorage.getItem("NofossToken");
         if (this.token){
-            console.log(this.token)
             this.state = this.loginStates.LOGGED_IN;
         }
         this.startTokenCheck();
