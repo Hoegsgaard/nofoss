@@ -7,10 +7,12 @@ import {observer} from "mobx-react";
 import {agent} from "../stores/Agent";
 import Recaptcha from 'react-recaptcha';
 import {vehicleStore} from "../stores/VehicleStore";
+import {Route, withRouter} from "react-router";
+import {LogIn} from "./Login";
 
 //const passwordHash = require('password-hash');
 let isVertified = false;
-export const CreateUser = observer(()=> {
+export const CreateUser = withRouter( observer((history)=> {
     const [show1, setShow1] = useState(false);
     const [show2, setShow2] = useState(false);
 
@@ -27,13 +29,13 @@ export const CreateUser = observer(()=> {
     function clean() {
         userStore.newFirm = "";
         userStore.newFirstName = "";
-        userStore.newLastNameName = "";
+        userStore.newLastName = "";
         userStore.newEmail = "";
         userStore.newPasswordOne = "";
         userStore.newpasswordtow ="";
     }
 
-    function createNewUser(password) {
+    function createNewUser() {
         if(userStore.newFirm !== ""
         && userStore.newFirstName !== ""
         && userStore.newLastName !==""
@@ -47,6 +49,7 @@ export const CreateUser = observer(()=> {
                 //userStore.newHashPass = hashPass;
                 agent.createUser();
                 clean();
+                window.location.replace("/")
             } else {
                 setShow1(true)
             }
@@ -105,6 +108,7 @@ export const CreateUser = observer(()=> {
                             <text>Email</text>
                             <InputGroup className="mb-3">
                                 <FormControl
+                                    type="email"
                                     aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default"
                                     value={userStore.newEmail}
@@ -125,7 +129,7 @@ export const CreateUser = observer(()=> {
                             </InputGroup></Col></Row>
 
                         <Row><Col md={{span: 10, offset: 1}}>
-                            <text>Password Confirm</text>
+                            <text>Gentag password</text>
                             <InputGroup className="mb-3">
                                 <FormControl
                                     type="password"
@@ -138,7 +142,7 @@ export const CreateUser = observer(()=> {
 
                         <Row><Col md={{span: 10, offset: 1}}>
                             <Button
-                                onClick={()=>createNewUser(userStore.newPasswordOne)}
+                                onClick={()=>createNewUser()}
                                 style={{
                                 width: '100%',
                                 background:'#637724',
@@ -174,4 +178,4 @@ export const CreateUser = observer(()=> {
             </Container>
         </div>
     );
-});
+}));
