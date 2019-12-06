@@ -7,30 +7,40 @@ import {CreateVehicle} from "./components/CreateVehicle";
 import {CreateUser} from "./components/CreateUser";
 import {CustomNavBar} from "./components/CustomNavBar";
 import {LogIn} from "./components/Login";
-import {SearchVehicleNew} from "./components/SearchVehicleNew";
+import {SearchVehicle} from "./components/SearchVehicle";
 import Container from "react-bootstrap/Container";
 import {Profile} from "./components/Profile";
 import {userStore} from "./stores/UserStore";
 
 function App() {
-    return (
-        <Container>
-            <CustomNavBar/>
+    function setupApp() {
+        if(userStore.state !== userStore.loginStates.LOGGED_IN){
+            return (
+                <Container>
+                    <Switch>
+                        <Route exact path={"/create/user"} component={CreateUser}/>
+                        <Route render={() => <LogIn/>}/>
+                    </Switch>
+                </Container>
+            )
+        }else {
+            return (
+            <Container>
+                <CustomNavBar/>
                 <Switch>
-                    {userStore.state !== userStore.loginStates.LOGGED_IN && <LogIn/>}
-                    {userStore.state === userStore.loginStates.LOGGED_IN &&
-                        <>
-                    <Route exact path={"/login"} component={LogIn}/>
-                    <Route exact path={"/search"} component={SearchVehicleNew}/>
-                    <Route exact path={"/create/vehicle"} component={CreateVehicle}/>
-                    <Route exact path={"/create/user"} component={CreateUser}/>
-                    <Route exact path={"/profile"} component={Profile}/>
-                    <Route exact path={"/"} component={SearchVehicleNew}/>
-                    </>
-                        }
-                    <Route render={() => <h1>404</h1>}/>
+                        <Route exact path={"/search"} component={SearchVehicle}/>
+                        <Route exact path={"/create/vehicle"} component={CreateVehicle}/>
+                        <Route exact path={"/profile"} component={Profile}/>
+                        <Route exact path={"/"} component={SearchVehicle}/>
+                        <Route render={() => <h1>404 - page not found</h1>}/>
                 </Switch>
-        </Container>
+            </Container>
+            )
+        }
+    }
+
+    return (
+       setupApp()
     );
 }
 

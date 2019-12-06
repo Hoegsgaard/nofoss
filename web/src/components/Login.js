@@ -1,12 +1,39 @@
-import {Col, FormControl, InputGroup, Row} from "react-bootstrap";
+import {observer} from "mobx-react";
+import {Col, FormControl, InputGroup, Row, Toast} from "react-bootstrap";
 import Button from "react-bootstrap/Button";
-import React from "react";
 import {Link} from "react-router-dom";
 import {CreateUser} from "./CreateUser";
 import Container from "react-bootstrap/Container";
 import {userStore} from "../stores/UserStore";
+import GoogleLogin from 'react-google-login';
+import GoogleButton from 'react-google-login';
+import {agent} from "../stores/Agent";
+import React, {useState} from "react";
+import {vehicleStore} from "../stores/VehicleStore";
 
-export const LogIn = () => {
+export const LogIn = observer( () => {
+    const [show1, setShow1] = useState(false);
+    const [show2, setShow2] = useState(false);
+
+    function login() {
+        if(userStore.loginData.username !== ""
+        && userStore.loginData.password !== "") {
+            userStore.doLogin();
+            if (userStore.state !== userStore.loginStates.LOGGED_IN && userStore.state !== userStore.loginStates.LOGGING_IN){
+                console.log((userStore.state));
+                userStore.loginData.password = "";
+                setShow1(true);
+            }
+        }else{
+            setShow2(true);
+        }
+    }
+
+    const responseGoogle = (response) => {
+        if(response.w3.U3){
+            agent.doGoogleLogin(response.accessToken, response.w3.U3)
+        }
+    };
     return (
         <div>
             <Container>
@@ -24,6 +51,7 @@ export const LogIn = () => {
                                 <FormControl
                                     aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default"
+                                    value={userStore.loginData.username}
                                     onChange={(e) => userStore.loginData.username = e.target.value}
                                 />
                             </InputGroup></Col></Row>
@@ -32,9 +60,11 @@ export const LogIn = () => {
                             <text>Password</text>
                             <InputGroup className="mb-3">
                                 <FormControl
+                                    id="passwordText"
                                     type="password"
                                     aria-label="Default"
                                     aria-describedby="inputGroup-sizing-default"
+                                    value={userStore.loginData.password}
                                     onChange={(e) => userStore.loginData.password = e.target.value}
                                 />
                             </InputGroup></Col></Row>
@@ -58,13 +88,36 @@ export const LogIn = () => {
                                 }}>Opret bruger</Button >
                             </Col>
                         </Row>
+                        <Row>
+                            <Col md={{span: 5, offset: 1}}
+                                 style={{
+                                     paddingTop: '5pt'}}>
+                                <GoogleLogin
+                                    clientId="535992274215-0i5rm3il5tt76ds4k3a6048pjocvcmob.apps.googleusercontent.com"
+                                    buttonText="Login med Google"
+                                    onSuccess={responseGoogle}
+                                    onFailure={responseGoogle}
+                                    cookiePolicy={'single_host_origin'
+                                    }/>
+                            </Col>
+                        </Row>
                     </Container>
-                </Col></Row>
+                </Col>
+                    <Col><Toast onClose={() => setShow1(false)} show={show1} delay={3000} autohide>
+                        <Toast.Header>
+                            <strong className="mr-auto">Nofoss</strong>
+                        </Toast.Header>
+                        <Toast.Body>Email og password stemmer ikke over ens</Toast.Body>
+                    </Toast>
+
+                    <Toast onClose={() => setShow2(false)} show={show2} delay={3000} autohide>
+                        <Toast.Header>
+                            <strong className="mr-auto">Nofoss</strong>
+                        </Toast.Header>
+                        <Toast.Body>Alle felter skal være udfyldt</Toast.Body>
+                    </Toast></Col></Row>
             </Container>
         </div>
     )
-};
+});
 
-function login() {
-    userStore.doLogin();
-}
