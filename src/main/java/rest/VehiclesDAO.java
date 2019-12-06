@@ -1,3 +1,5 @@
+package rest;
+
 import data.Vehicle;
 
 import java.util.List;

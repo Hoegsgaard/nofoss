@@ -1,4 +1,4 @@
-package rest;
+package Handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import data.User;

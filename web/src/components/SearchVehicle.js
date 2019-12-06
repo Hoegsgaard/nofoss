@@ -58,7 +58,6 @@ export const SearchVehicle = observer(() => {
                                   onChange={(e) => {
                                       if (e.target.checked) {
                                           vehicleStore.selectedFuelTypes.push(brand)
-                                          console.log(vehicleStore.selectedFuelTypes)
                                       } else {
                                           var index = vehicleStore.selectedFuelTypes.indexOf(e.target.value);
                                           if (index > -1) {

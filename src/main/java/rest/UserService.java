@@ -1,18 +1,9 @@
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoDatabase;
+package rest;
+
 import exception.NoImplementationException;
-import org.bson.Document;
-import rest.JWTHandler;
-import rest.LoginData;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.ExceptionMapper;
-import javax.ws.rs.ext.Provider;
-import java.util.List;
 
 @Path("user")
 @Produces(MediaType.APPLICATION_JSON)

@@ -1,9 +1,12 @@
 package rest;
 
+import Handler.JWTHandler;
+import data.LoginData;
 import data.User;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+
 
 @Path("login")
 @Produces(MediaType.APPLICATION_JSON)

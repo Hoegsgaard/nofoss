@@ -1,17 +1,10 @@
+package rest;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoDatabase;
-import data.Vehicle;
-import org.apache.catalina.mapper.Mapper;
-import org.bson.Document;
-import rest.JWTHandler;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.ArrayList;
-import java.util.List;
 
 @Path("mongo")
 @Produces(MediaType.APPLICATION_JSON)

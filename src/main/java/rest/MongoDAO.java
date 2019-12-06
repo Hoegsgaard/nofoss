@@ -1,20 +1,19 @@
+package rest;
+
+import Handler.JWTHandler;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import data.User;
 import data.Vehicle;
-import jdk.nashorn.internal.parser.JSONParser;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import org.mindrot.jbcrypt.BCrypt;
-import rest.JWTHandler;
-import rest.LoginData;
 
 import javax.ws.rs.NotAuthorizedException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class MongoDAO implements VehiclesDAO,UserDAO{
 

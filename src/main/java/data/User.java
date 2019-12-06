@@ -16,10 +16,6 @@ import org.bson.types.ObjectId;
 @Entity
 public class User {
 
-    public User(String username,String token){
-        this.username=username;
-        this.token=token;
-    }
     private String username;
     private String token;
 
