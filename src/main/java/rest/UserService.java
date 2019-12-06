@@ -1,5 +1,7 @@
 package rest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import exception.NoImplementationException;
 
 import javax.ws.rs.*;
@@ -18,9 +20,10 @@ public class UserService {
     }
 
     @GET
-    public String getUser() throws NoImplementationException{
-        System.out.println("endpoint hit");
-        throw new NoImplementationException("GetUser not implemented, yet");
+    public String getUser() throws NoImplementationException, JsonProcessingException{
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(mongoDAO.getUser());
+
     }
 
     @Path("login")

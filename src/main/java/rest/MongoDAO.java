@@ -6,10 +6,12 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import data.User;
 import data.Vehicle;
+import exception.NoImplementationException;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import org.mindrot.jbcrypt.BCrypt;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.ws.rs.NotAuthorizedException;
 import java.util.ArrayList;
@@ -22,8 +24,8 @@ public class MongoDAO implements VehiclesDAO,UserDAO{
     private MongoDatabase mdb = MongoConnector.getInstance("dummyData").getDb();
 
     @Override
-    public String getUser() {
-        return null;
+    public String getUser() throws NoImplementationException {
+        throw new NoImplementationException("GetUser not implemented, yet");
     }
 
     @Override
