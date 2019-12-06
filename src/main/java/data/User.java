@@ -10,24 +10,18 @@ import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 @Entity
 public class User {
-    private String username;
-    private String token; //CHRISTIAN HVAD ER DETTTE I VIRKELIGHEDEN?
 
-
-
-    //@Id @JsonIgnore //
-    //private ObjectId _id;
-
-    /*public String getId(){ //Konverterer ObjectID'et til en pæn string
-        return _id.toHexString();
+    public User(String username,String token){
+        this.username=username;
+        this.token=token;
     }
-    public void setID(String id){ //Konverterer en HexString til ObjectID
-        _id = new ObjectId(id);
-    }       */
+    private String username;
+    private String token;
+
 }
 
