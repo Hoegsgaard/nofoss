@@ -9,7 +9,7 @@ class VehicleStore{
 
     response;
     vehicles = [];
-    brands = ["Volvo", "Renault", "Iveco","Scania"];
+    brands = ["Volvo", "Renault", "Iveco","Scania", "Tesla"];
     fuelType = ["Gas", "El"];
 
     newBrand = "";
